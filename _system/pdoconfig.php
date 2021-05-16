@@ -1,5 +1,5 @@
 <?php
     $host = 'localhost';
-    $dbname = 'satis';
-    $username = 'root';
-    $password = '';
+    $dbname = 'u567125998_Satis';
+    $username = 'u567125998_emirhakan';
+    $password = 'cE=9=9;hL6/';
