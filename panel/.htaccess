@@ -1,0 +1,9 @@
+DirectoryIndex /panel/index.php
+RewriteEngine on
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+
+RewriteBase /panel/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /panel/index.php?/$1 [L]

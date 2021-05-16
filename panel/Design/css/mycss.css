@@ -1,0 +1,62 @@
+.panel_table tr td {
+    vertical-align: middle;
+}
+
+.panel_table tr td:first-child {
+    text-align: center;
+}
+
+.panel_table tr td img {
+    max-width: 120px;
+}
+
+.panel_table_normal tr td {
+    vertical-align: middle;
+}
+
+.yeni_duzenle_button {
+    font-size: 17px !important;
+    margin-right: 16px;
+    padding-top: 8px !important;
+    height: 43px;
+    place-self: center;
+    width: 157px;
+}
+
+.wrap_ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.panel_image {
+    object-fit: contain;
+    margin: 4px;
+    width: 93%;
+    height: 45px;
+}
+.panel_button {
+    height: 20px;
+    font-size: 12px !important;
+    padding: 1px !important;
+}
+
+#Galeri{
+    margin-top: 20px;
+}
+#Galeri .move{
+    width: 32%;
+    float: left;
+    margin-right: 1%;
+    position: relative;
+    height: 70px;
+    overflow: hidden;
+}
+
+#Galeri .move button {
+    position: absolute;
+    bottom: 0;
+}
+#Galeri .move img{
+    cursor: move;
+}
