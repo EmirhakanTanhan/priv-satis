@@ -3,7 +3,7 @@ if ($_POST) {
     $name = $_POST['name'];
     $description = $_POST['description'];
     $status = $_POST['status'];
-    $image = "/Cdn/" . $_POST['image'];
+    $image = $_POST['pic'];
 
     $Query = Process("insert", "Banner", array(
         "status" => $status,
@@ -59,6 +59,7 @@ if ($_POST) {
                                     <div class="form-group col-sm-12">
                                         <input type="hidden"
                                                id="Dosya"
+                                               name="pic"
                                                value="">
                                         <label class="form-label">Resim</label>
                                         <button type="button"

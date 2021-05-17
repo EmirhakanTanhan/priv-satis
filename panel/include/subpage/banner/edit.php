@@ -4,7 +4,7 @@ if ($_POST) {
     $name = $_POST['name'];
     $description = $_POST['description'];
     $status = $_POST['status'];
-    $image = "/Cdn/" . $_POST['image'];
+    $image = $_POST['pic'];
 
     $Query = Process("update", "Banner", array(
         "status" => $status,
@@ -64,7 +64,8 @@ if ($_POST) {
                                     <div class="form-group col-sm-12">
                                         <input type="hidden"
                                                id="Dosya"
-                                               value="">
+                                               name="pic"
+                                               value="<?php echo $Banner['image'] ?>">
                                         <label class="form-label">Resim</label>
                                         <button type="button"
                                                 data-toggle="modal"
@@ -73,8 +74,8 @@ if ($_POST) {
                                                 onclick="UrlYukle('/panel/storage/index.php?integration=custom&amp;type=files&amp;Input=Dosya')"
                                                 class="btn btn-light btn-block btn-xs">Seçiniz
                                         </button>
-                                        <div id="ResimBilgi" class="mt-1" <?php if (!$Data['image']) echo 'style="display: none;"'; ?>>
-                                            <img src="<?php echo $Data['image'] ?>" id="imgDosya"/>
+                                        <div id="ResimBilgi" class="mt-1" style="text-align: center" <?php if (!$Banner['image']) echo 'style="display: none;"'; ?>>
+                                            <img src="<?php echo $Banner['image'] ?>" id="imgDosya" style="height: 120px"/>
                                             <p class="text-center" id="DosyaText"></p>
                                         </div>
                                     </div>
