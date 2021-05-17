@@ -88,6 +88,8 @@ if ($_POST) {
                                     </div>
                                 </div>
 
+                                <!--deneme-->
+
                                 <div class="form-group col-md-2">
                                     <label>Durum</label><br>
                                     <div class="btn-group" data-toggle="buttons">
@@ -103,9 +105,23 @@ if ($_POST) {
                                 </div>
 
                                 <div class="form-group col-md-2">
-                                    <div>
-                                        <label class="form-control-label" for="l6">Resim</label>
-                                        <input name="pic" type="file" id="l6"/>
+                                    <div class="form-group col-sm-12">
+                                        <input type="hidden"
+                                               id="Dosya"
+                                               name="pic"
+                                               value="">
+                                        <label class="form-label">Resim</label>
+                                        <button type="button"
+                                                data-toggle="modal"
+                                                data-target="#DosyaModal"
+                                                id="DosyaBtn"
+                                                onclick="UrlYukle('/panel/storage/index.php?integration=custom&amp;type=files&amp;Input=Dosya')"
+                                                class="btn btn-light btn-block btn-xs">Seçiniz
+                                        </button>
+                                        <div id="ResimBilgi" class="mt-1" style="display: none">
+                                            <img src="" id="imgDosya" style="height: 120px"/>
+                                            <p class="text-center" id="DosyaText"></p>
+                                        </div>
                                     </div>
                                 </div>
 

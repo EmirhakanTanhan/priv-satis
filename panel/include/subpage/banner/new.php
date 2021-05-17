@@ -14,7 +14,6 @@ if ($_POST) {
     if ($Query) header("location:/panel/banner/new#o"); else  header("location:/panel/banner/new#n");
 }
 ?>
-
 <div class="vb__layout__content">
     <div class="vb__breadcrumbs">
         <div class="vb__breadcrumbs__path">
