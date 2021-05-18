@@ -138,9 +138,8 @@ if ($_POST) {
                                                     class="btn btn-light btn-block btn-xs">Seçiniz
                                             </button>
                                             <div id="ResimBilgi" style="display: none;">
-                                                <img src="" class="img-thumbnail" id="DosyaImg"/>
                                                 <button type="button" onclick="GaleriEkle()"
-                                                        class="btn btn-xs btn-success btn-block">
+                                                        class="btn btn-xs btn-success btn-block mt-1">
                                                     <span id="DosyaText"></span> Ekle
                                                 </button>
                                             </div>

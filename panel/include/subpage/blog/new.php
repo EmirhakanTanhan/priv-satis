@@ -6,8 +6,7 @@ if ($_POST) {
     $link = $_POST['link'];
     $label = $_POST['label'];
     $content = $_POST['content'];
-
-    /*$image = "/Cdn/" . $_POST['image'];*/
+    $pics = $_POST['pic'];
 
     $Query = Process("insert", "Pages", array(
         "status" => $status,
@@ -18,6 +17,16 @@ if ($_POST) {
         "label" => $label,
         "Pages_id" => 1
     ));
+
+    if ($Query and $pics) {
+        foreach ($pics as $index => $pic) {
+            $Query_pic = Process("insert", "Images", array(
+                "image" => $pic,
+                "orders" => $index,
+                "Pages_id" => $Query,
+            ));
+        }
+    }
 
     if ($Query) header("location:/panel/blog/new#o"); else  header("location:/panel/blog/new#n");
 }
@@ -45,53 +54,73 @@ if ($_POST) {
                         </h4>
                         <form action="" method="post">
                             <div class="form-row">
-                                <div class="form-group col-md-5">
-                                    <label for="label">Label</label>
-                                    <input type="text" class="form-control" name="label" placeholder=""
-                                           id="label"/>
-                                </div>
-
-                                <div class="form-group col-md-2">
-                                    <label>Durum</label><br>
-                                    <div class="btn-group" data-toggle="buttons">
-                                        <label class="btn btn-outline-primary active" style="min-width: 62px">
-                                            <input type="radio" value="1" name="status" checked/>
-                                            Açık
-                                        </label>
-                                        <label class="btn btn-outline-primary">
-                                            <input type="radio" value="0" name="status"/>
-                                            Kapalı
-                                        </label>
+                                <div class="form-row col-md-8"><!--1-->
+                                    <div class="form-group col-md-10">
+                                        <label for="name">Başlık</label>
+                                        <input type="text" class="form-control" name="name" placeholder=""
+                                               id="name"/>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label>Durum</label><br>
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-outline-primary active" style="min-width: 62px">
+                                                <input type="radio" value="1" name="status" checked/>
+                                                Açık
+                                            </label>
+                                            <label class="btn btn-outline-primary">
+                                                <input type="radio" value="0" name="status"/>
+                                                Kapalı
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="label">Label</label>
+                                        <input type="text" class="form-control" name="label" placeholder=""
+                                               id="label"/>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="link">Link</label>
+                                        <input type="text" class="form-control" name="link" placeholder=""
+                                               id="link"/>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2">
-                                    <div>
-                                        <label class="form-control-label" for="l6">Resim</label>
-                                        <input name="image" type="file" id="l6"/>
+
+                                <div class="form-row col-md-4"><!--2-->
+                                    <div class="form-group col-md-12">
+                                        <div class="form-group col-sm-12">
+                                            <input type="hidden"
+                                                   id="Dosya"
+                                                   value="">
+                                            <label class="form-label">Resim</label>
+                                            <button type="button"
+                                                    data-toggle="modal"
+                                                    data-target="#DosyaModal"
+                                                    id="DosyaBtn"
+                                                    onclick="UrlYukle('/panel/storage/index.php?integration=custom&amp;type=files&amp;Input=Dosya')"
+                                                    class="btn btn-light btn-block btn-xs">Seçiniz
+                                            </button>
+                                            <div id="ResimBilgi" style="display: none;">
+                                                <button type="button" onclick="GaleriEkle()"
+                                                        class="btn btn-xs btn-success btn-block mt-1">"
+                                                    <span id="DosyaText"></span>" Ekle
+                                                </button>
+                                            </div>
+                                            <div id="Galeri"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="name">Başlık</label>
-                                    <input type="text" class="form-control" name="name" placeholder=""
-                                           id="name"/>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="link">Link</label>
-                                    <input type="text" class="form-control" name="link" placeholder=""
-                                           id="link"/>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label for="description">Açıklama</label>
-                                    <textarea class="form-control" name="description" id="description"
-                                              cols="30"
-                                              rows="3"></textarea>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label for="name">İçerik</label>
-                                    <textarea class="texteditor" name="content"></textarea>
+                                <div class="form-row col-md-12"><!--3-->
+                                    <div class="form-group col-md-12">
+                                        <label for="description">Açıklama</label>
+                                        <textarea class="form-control" name="description" id="description"
+                                                  cols="30"
+                                                  rows="3"></textarea>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="name">İçerik</label>
+                                        <textarea class="texteditor" name="content"></textarea>
+                                    </div>
                                 </div>
                             </div>
 
