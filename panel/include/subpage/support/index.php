@@ -1,7 +1,5 @@
 <?php
 $Ticket_id = UrlRead(4);
-var_dump("ticket id: ");
-var_dump($Ticket_id);
 if ($Ticket_id) {
     $Ticket = Sorgu("*", "Ticket", "id='$Ticket_id'", 1);
     $Messages = TicketMessage($Ticket_id);
@@ -10,6 +8,9 @@ if ($Ticket_id) {
 $Pagination_ticket = Paginator(5, "Ticket", UrlRead(3), "", "0");
 if ($Pagination_ticket)
     $Tickets = Sorgu("*", "Ticket", "", "$Pagination_ticket[Start],$Pagination_ticket[Limit]", "id DESC");
+
+var_dump("tickets: ");
+var_dump($Tickets);
 
 if ($_POST) {
     $description = $_POST['description'];
