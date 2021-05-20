@@ -1,15 +1,15 @@
 <?php
-var_dump("deneme_ticket_önce");
 $Ticket_id = UrlRead(4);
+var_dump("ticket_önce_1");
 if ($Ticket_id) {
+    var_dump("ticket_önce_2");
     $Ticket = Sorgu("*", "Ticket", "id='$Ticket_id'", 1);
+    var_dump("ticket_önce_3");
     $Messages = TicketMessage($Ticket_id);
+    var_dump("ticket_önce_4");
 }
-var_dump("deneme_ticket_sonra");
 
-var_dump("deneme_önce");
 $Pagination_ticket = Paginator(5, "Ticket", UrlRead(3), "", "0");
-var_dump("deneme_sonra");
 if ($Pagination_ticket)
     $Tickets = Sorgu("*", "Ticket", "", "$Pagination_ticket[Start],$Pagination_ticket[Limit]", "id DESC");
 

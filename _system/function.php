@@ -169,7 +169,6 @@ function DiscountedPrice($Price, $Discount, $Order = NULL)
 
 function Paginator($Limit, $Table, $PageUrl, $Where = NULL, $User = 1)
 {   //User = 0 (Admin), User = 1 (User)
-    var_dump("deneme_paginator");
     if ($User == 1) {
         $User_id = $_SESSION['User_id'];
         $_User = "Users_id='$User_id'";
