@@ -2,18 +2,12 @@
 $Ticket_id = UrlRead(4);
 if ($Ticket_id) {
     $Ticket = Sorgu("*", "Ticket", "id='$Ticket_id'", 1);
-    var_dump("ticket: ");
-    var_dump($Ticket);
     $Messages = TicketMessage($Ticket_id);
-    var_dump("message: ");
-    var_dump($Messages);
 }
 
-/*$Pagination_ticket = Paginator(5, "Ticket", UrlRead(3), "", "0");*/
-
-/*if ($Pagination_ticket)*/
-    /*$Tickets = Sorgu("*", "Ticket", "", "$Pagination_ticket[Start],$Pagination_ticket[Limit]", "id DESC");*/
-$Tickets = Sorgu("*", "Ticket");
+$Pagination_ticket = Paginator(5, "Ticket", UrlRead(3), "", "0");
+if ($Pagination_ticket)
+    $Tickets = Sorgu("*", "Ticket", "", "$Pagination_ticket[Start],$Pagination_ticket[Limit]", "id DESC");
 
 
 if ($_POST) {
