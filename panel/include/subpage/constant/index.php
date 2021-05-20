@@ -1,5 +1,6 @@
 <?php
 $Constants = Sorgu("*", "Constant");
+var_dump($Constants);
 ?>
 
 <div class="vb__layout__content">
