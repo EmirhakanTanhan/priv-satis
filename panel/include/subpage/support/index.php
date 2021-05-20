@@ -1,12 +1,8 @@
 <?php
 $Ticket_id = UrlRead(4);
-var_dump("ticket_önce_1");
 if ($Ticket_id) {
-    var_dump("ticket_önce_2");
     $Ticket = Sorgu("*", "Ticket", "id='$Ticket_id'", 1);
-    var_dump("ticket_önce_3");
     $Messages = TicketMessage($Ticket_id);
-    var_dump("ticket_önce_4");
 }
 
 $Pagination_ticket = Paginator(5, "Ticket", UrlRead(3), "", "0");
