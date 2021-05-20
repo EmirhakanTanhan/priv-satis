@@ -69,7 +69,7 @@ class Assets
         $mail = new PHPMailer();
         $mail->isSMTP();
         $mail->IsHTML(true);
-        $mail->SMTPDebug = 1;
+        $mail->SMTPDebug = 0;
         $mail->CharSet = 'UTF-8';
         $mail->SMTPAuth = true;
 
