@@ -169,11 +169,11 @@ function DiscountedPrice($Price, $Discount, $Order = NULL)
 
 function Paginator($Limit, $Table, $PageUrl, $Where = NULL, $User = 1)
 {   //User = 0 (Admin), User = 1 (User)
+    var_dump("deneme");
     if ($User == 1) {
         $User_id = $_SESSION['User_id'];
         $_User = "Users_id='$User_id'";
     }
-    var_dump("deneme");
     if ($Where) $_Where = "AND $Where";
 
     $Count = Sorgu("COUNT(id) AS id", $Table, $_User . $_Where, 1)['id'];
