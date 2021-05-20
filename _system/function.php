@@ -201,9 +201,8 @@ function Paginator($Limit, $Table, $PageUrl, $Where = NULL, $User = 1)
 
 function TicketMessage($Ticket_id)
 {
-    var_dump("deneme__1");
     $Messages = Sorgu("*", "Ticket_message", "Ticket_id='$Ticket_id'", "", "id ASC");
-    var_dump("deneme__2");
+
     return $Messages;
 }
 
