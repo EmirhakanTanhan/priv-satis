@@ -2,15 +2,17 @@
 $Ticket_id = UrlRead(4);
 if ($Ticket_id) {
     $Ticket = Sorgu("*", "Ticket", "id='$Ticket_id'", 1);
+    var_dump("ticket: ");
+    var_dump($Ticket);
     $Messages = TicketMessage($Ticket_id);
+    var_dump("message: ");
+    var_dump($Messages);
 }
 
 $Pagination_ticket = Paginator(5, "Ticket", UrlRead(3), "", "0");
 if ($Pagination_ticket)
     $Tickets = Sorgu("*", "Ticket", "", "$Pagination_ticket[Start],$Pagination_ticket[Limit]", "id DESC");
 
-var_dump("tickets: ");
-var_dump($Tickets);
 
 if ($_POST) {
     $description = $_POST['description'];
@@ -80,119 +82,121 @@ if ($_POST) {
                     <p style="text-align: center">Herhangi Bir Destek Talebi Bulunmamaktadır.</p>
                 </div>
             <?php } else { ?>
-            <div class="vb__messaging__sidebar mr-4">
-                <div class="vb__customScroll vb__messaging__dialogItems" style="height: unset">
-                    <?php
-                    foreach ($Tickets as $ticket) {
-                        ?>
-                        <a class="vb__messaging__dialogItem d-flex flex-nowrap align-items-center"
-                           href="/panel/support/<?php echo UrlRead(3) . '/' . $ticket['id'] ?>">
-                            <div class="vb__messaging__dialogInfo flex-grow-1">
-                                <div class="font-size-12 text-truncate"><?php echo User($ticket['Users_id'])['email']; ?></div>
-                                <div class="vb__messaging__dialogName text-dark font-size-18 font-weight-bold text-truncate"
-                                     title="<?php echo $ticket['name'] ?>">
-                                    <?php echo $ticket['name'] ?>
+                <div class="vb__messaging__sidebar mr-4">
+                    <div class="vb__customScroll vb__messaging__dialogItems" style="height: unset">
+                        <?php
+                        foreach ($Tickets as $ticket) {
+                            ?>
+                            <a class="vb__messaging__dialogItem d-flex flex-nowrap align-items-center"
+                               href="/panel/support/<?php echo UrlRead(3) . '/' . $ticket['id'] ?>">
+                                <div class="vb__messaging__dialogInfo flex-grow-1">
+                                    <div class="font-size-12 text-truncate"><?php echo User($ticket['Users_id'])['email']; ?></div>
+                                    <div class="vb__messaging__dialogName text-dark font-size-18 font-weight-bold text-truncate"
+                                         title="<?php echo $ticket['name'] ?>">
+                                        <?php echo $ticket['name'] ?>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    <?php } ?>
-                </div>
-                <div class="mb-5"> <!--PAGINATOR, KOMPLE ALABILIRSIN BURAYI, HER SAYFA ICIN AYNI-->
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <?php
-                            if ($Pagination_ticket['Count'] > $Pagination_ticket['Limit']) {
-                                if ($Pagination_ticket['Page'] != 1) { ?>
-                                    <li class="page-item">
-                                        <a class="page-link" href="/panel/support/1" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                <?php } ?>
+                            </a>
+                        <?php } ?>
+                    </div>
+                    <div class="mb-5"> <!--PAGINATOR, KOMPLE ALABILIRSIN BURAYI, HER SAYFA ICIN AYNI-->
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <?php
+                                if ($Pagination_ticket['Count'] > $Pagination_ticket['Limit']) {
+                                    if ($Pagination_ticket['Page'] != 1) { ?>
+                                        <li class="page-item">
+                                            <a class="page-link" href="/panel/support/1" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                    <?php } ?>
 
-                                <?php for ($index = $Pagination_ticket['Page'] - 2, $countLimit = 0, $check = 0; $index <= $Pagination_ticket['Page'], $countLimit < 3; $index++, $countLimit++) {
-                                    if ($index < 0) $index = 0;
-                                    if ($Pagination_ticket['Page'] == $Pagination_ticket['LastPage'] and $countLimit == 0 and $Pagination_ticket['LastPage'] != 2) {
-                                        $index = $Pagination_ticket['LastPage'] - 3;
-                                    }
-                                    if ($index < $Pagination_ticket['LastPage']) {
-                                        ?>
-                                        <li class="page-item <?php if ($Pagination_ticket['Page'] == ($index + 1)) echo "active" ?>">
+                                    <?php for ($index = $Pagination_ticket['Page'] - 2, $countLimit = 0, $check = 0; $index <= $Pagination_ticket['Page'], $countLimit < 3; $index++, $countLimit++) {
+                                        if ($index < 0) $index = 0;
+                                        if ($Pagination_ticket['Page'] == $Pagination_ticket['LastPage'] and $countLimit == 0 and $Pagination_ticket['LastPage'] != 2) {
+                                            $index = $Pagination_ticket['LastPage'] - 3;
+                                        }
+                                        if ($index < $Pagination_ticket['LastPage']) {
+                                            ?>
+                                            <li class="page-item <?php if ($Pagination_ticket['Page'] == ($index + 1)) echo "active" ?>">
+                                                <a class="page-link"
+                                                   href="/panel/support/<?php echo $index + 1; ?>"><?php echo $index + 1; ?></a>
+                                            </li>
+                                        <?php }
+                                    } ?>
+
+                                    <?php if ($Pagination_ticket['Page'] != $Pagination_ticket['LastPage']) { ?>
+                                        <li class="page-item">
                                             <a class="page-link"
-                                               href="/panel/support/<?php echo $index + 1; ?>"><?php echo $index + 1; ?></a>
+                                               href="/panel/support/<?php echo $Pagination_ticket['LastPage']; ?>"
+                                               aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
                                         </li>
                                     <?php }
                                 } ?>
-
-                                <?php if ($Pagination_ticket['Page'] != $Pagination_ticket['LastPage']) { ?>
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                           href="/panel/support/<?php echo $Pagination_ticket['LastPage']; ?>"
-                                           aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                <?php }
-                            } ?>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <?php if ($Ticket_id) { ?>
-                <div class="card flex-grow-1">
-                    <div class="card-header card-header-flex flex-wrap">
-                        <div class="d-flex flex-column justify-content-center mr-auto">
-                            <h5 class="mb-0 mr-2 font-size-18">
-                                <?php echo User($Ticket['Users_id'])['name'] . " " . User($Ticket['Users_id'])['surname'] ?>
-                                <span class="font-size-14 text-gray-6"><a style="text-decoration: underline"
-                                                                          href="/panel/users/<?php echo $Ticket['Users_id'] ?>"><?php echo User($Ticket['Users_id'])['email'] ?></a></span>
-                            </h5>
-                        </div>
+                            </ul>
+                        </nav>
                     </div>
-                    <div class="card-body">
-                        <div class="d-flex flex-column justify-content-end" style="height: 350px">
-                            <div class="vb__g14__contentWrapper vb__customScroll">
-                                <?php foreach ($Messages as $message) {
-                                    if ($message['Admin_id']) {
-                                        $Admin_name = Sorgu("name", "Admin", "id='$message[Admin_id]'", 1)['name'];
-                                        ?>
-                                        <div class="vb__g14__message">
-                                            <div class="vb__g14__messageContent">
-                                                <div class="text-gray-4 font-size-12 text-uppercase"><?php echo $Admin_name . " | " . date_format(date_create($message['history']), "Y/m/d, H:i"); ?>
-                                                </div>
-                                                <div><?php echo $message['description']; ?></div>
-                                            </div>
-                                        </div>
-                                    <?php }
-                                    if ($message['Users_id']) { ?>
-                                        <div class="vb__g14__message vb__g14__message--answer">
-                                            <div class="vb__g14__messageContent">
-                                                <div class="text-gray-4 font-size-12 text-uppercase"><?php echo date_format(date_create($message['history']), "Y/m/d, H:i") ?>
-                                                </div>
-                                                <div><?php echo $message['description'] ?></div>
-                                            </div>
-                                        </div>
-                                    <?php }
-                                } ?>
+                </div>
+                <?php if ($Ticket_id) { ?>
+                    <div class="card flex-grow-1">
+                        <div class="card-header card-header-flex flex-wrap">
+                            <div class="d-flex flex-column justify-content-center mr-auto">
+                                <h5 class="mb-0 mr-2 font-size-18">
+                                    <?php echo User($Ticket['Users_id'])['name'] . " " . User($Ticket['Users_id'])['surname'] ?>
+                                    <span class="font-size-14 text-gray-6"><a style="text-decoration: underline"
+                                                                              href="/panel/users/<?php echo $Ticket['Users_id'] ?>"><?php echo User($Ticket['Users_id'])['email'] ?></a></span>
+                                </h5>
                             </div>
                         </div>
-                        <div class="pt-2 pb-2"></div>
-                        <div>
-                            <form action="" method="post" autocomplete="off">
-                                <div class="input-group mb-3">
-                                    <input type="hidden" name="ticketId" value="<?php echo $Ticket_id; ?>"/>
-                                    <input type="text" class="form-control" name="description" placeholder="Cevap Yaz"/>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit">
-                                            <i class="fe fe-send align-middle"></i>
-                                        </button>
-                                    </div>
+                        <div class="card-body">
+                            <div class="d-flex flex-column justify-content-end" style="height: 350px">
+                                <div class="vb__g14__contentWrapper vb__customScroll">
+                                    <?php foreach ($Messages as $message) {
+                                        if ($message['Admin_id']) {
+                                            $Admin_name = Sorgu("name", "Admin", "id='$message[Admin_id]'", 1)['name'];
+                                            ?>
+                                            <div class="vb__g14__message">
+                                                <div class="vb__g14__messageContent">
+                                                    <div class="text-gray-4 font-size-12 text-uppercase"><?php echo $Admin_name . " | " . date_format(date_create($message['history']), "Y/m/d, H:i"); ?>
+                                                    </div>
+                                                    <div><?php echo $message['description']; ?></div>
+                                                </div>
+                                            </div>
+                                        <?php }
+                                        if ($message['Users_id']) { ?>
+                                            <div class="vb__g14__message vb__g14__message--answer">
+                                                <div class="vb__g14__messageContent">
+                                                    <div class="text-gray-4 font-size-12 text-uppercase"><?php echo date_format(date_create($message['history']), "Y/m/d, H:i") ?>
+                                                    </div>
+                                                    <div><?php echo $message['description'] ?></div>
+                                                </div>
+                                            </div>
+                                        <?php }
+                                    } ?>
                                 </div>
-                            </form>
+                            </div>
+                            <div class="pt-2 pb-2"></div>
+                            <div>
+                                <form action="" method="post" autocomplete="off">
+                                    <div class="input-group mb-3">
+                                        <input type="hidden" name="ticketId" value="<?php echo $Ticket_id; ?>"/>
+                                        <input type="text" class="form-control" name="description"
+                                               placeholder="Cevap Yaz"/>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit">
+                                                <i class="fe fe-send align-middle"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php } } ?>
+                <?php }
+            } ?>
         </div>
     </div>
 </div>
