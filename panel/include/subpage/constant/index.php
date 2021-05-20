@@ -55,9 +55,8 @@ $Constants = Sorgu("*", "Constant");
                                     <tbody class="panel_table_normal">
                                     <?php
                                     foreach ($Constants as $constant) {
-                                        if ($constant['id'] != 1) {
-                                            ?>
-                                            <tr>
+                                        ?>
+                                        <tr>
                                             <td><img src="<?php echo $constant['image'] ?>" alt=""
                                                      style="max-height: 100px"></td>
                                             <td><?php echo $constant['name'] ?></td>
@@ -67,8 +66,7 @@ $Constants = Sorgu("*", "Constant");
                                                     </i> Düzenle</a>
                                             </td>
                                         </tr>
-                                        <?php }
-                                    } ?>
+                                    <?php } ?>
                                     </tbody>
                                 </table>
                                 <script>
