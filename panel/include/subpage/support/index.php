@@ -5,7 +5,9 @@ if ($Ticket_id) {
     $Messages = TicketMessage($Ticket_id);
 }
 
+var_dump("deneme_önce");
 $Pagination_ticket = Paginator(5, "Ticket", UrlRead(3), "", "0");
+var_dump("deneme_sonra");
 if ($Pagination_ticket)
     $Tickets = Sorgu("*", "Ticket", "", "$Pagination_ticket[Start],$Pagination_ticket[Limit]", "id DESC");
 
