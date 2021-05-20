@@ -1,5 +1,7 @@
 <?php
 $Ticket_id = UrlRead(4);
+var_dump("ticket id: ");
+var_dump($Ticket_id);
 if ($Ticket_id) {
     $Ticket = Sorgu("*", "Ticket", "id='$Ticket_id'", 1);
     $Messages = TicketMessage($Ticket_id);
