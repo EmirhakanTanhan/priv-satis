@@ -1,6 +1,5 @@
 <?php
 $Constants = Sorgu("*", "Constant");
-var_dump($Constants);
 ?>
 
 <div class="vb__layout__content">
@@ -56,6 +55,7 @@ var_dump($Constants);
                                     <tbody class="panel_table_normal">
                                     <?php
                                     foreach ($Constants as $constant) {
+                                        var_dump($constant);
                                         if ($constant['id'] != 1) {
                                             ?>
                                             <tr>
