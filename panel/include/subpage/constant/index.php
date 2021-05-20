@@ -54,8 +54,7 @@ $Constants = Sorgu("*", "Constant");
                                     </thead>
                                     <tbody class="panel_table_normal">
                                     <?php
-                                    foreach ($Constants as $constant) {
-                                        ?>
+                                    foreach ($Constants as $constant) { ?>
                                         <tr>
                                             <td><img src="<?php echo $constant['image'] ?>" alt=""
                                                      style="max-height: 100px"></td>
