@@ -9,11 +9,11 @@ if ($Ticket_id) {
     var_dump($Messages);
 }
 
-$Pagination_ticket = Paginator(5, "Ticket", UrlRead(3), "", "0");
-var_dump("Pagination_ticket: ");
-var_dump($Pagination_ticket);
-if ($Pagination_ticket)
-    $Tickets = Sorgu("*", "Ticket", "", "$Pagination_ticket[Start],$Pagination_ticket[Limit]", "id DESC");
+/*$Pagination_ticket = Paginator(5, "Ticket", UrlRead(3), "", "0");*/
+
+/*if ($Pagination_ticket)*/
+    /*$Tickets = Sorgu("*", "Ticket", "", "$Pagination_ticket[Start],$Pagination_ticket[Limit]", "id DESC");*/
+$Tickets = Sorgu("*", "Ticket");
 
 
 if ($_POST) {
