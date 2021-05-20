@@ -51,6 +51,13 @@
                 </li>
 
                 <li class="vb__menuLeft__item ">
+                    <a class="vb__menuLeft__item__link" href="/panel/constant">
+                        <span class="vb__menuLeft__item__title">Sabit İçerik Yönetimi</span>
+                        <i class="vb__menuLeft__item__icon fe fe-stop-circle"></i>
+                    </a>
+                </li>
+
+                <li class="vb__menuLeft__item ">
                     <a class="vb__menuLeft__item__link" href="/panel/banner">
                         <span class="vb__menuLeft__item__title">Banner Yönetimi</span>
                         <i class="vb__menuLeft__item__icon fe fe-image"></i>
@@ -80,7 +87,7 @@
 
                 <li class="vb__menuLeft__item ">
                     <a class="vb__menuLeft__item__link" href="/panel/category">
-                        <span class="vb__menuLeft__item__title">Kategoriler</span>
+                        <span class="vb__menuLeft__item__title">Kategori Yönetimi</span>
                         <i class="vb__menuLeft__item__icon fe fe-tag"></i>
                     </a>
                 </li>
@@ -101,7 +108,7 @@
 
                 <li class="vb__menuLeft__item ">
                     <a class="vb__menuLeft__item__link" href="/panel/blog">
-                        <span class="vb__menuLeft__item__title">Blog</span>
+                        <span class="vb__menuLeft__item__title">Blog Yönetimi</span>
                         <i class="vb__menuLeft__item__icon fe fe-bold"></i>
                     </a>
                 </li>

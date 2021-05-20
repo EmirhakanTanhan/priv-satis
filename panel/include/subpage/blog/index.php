@@ -12,10 +12,10 @@ $SubMenu = subMenu();
             <a href="/panel">Panel</a>
             <?php if ($Page_id == 0) { ?>
                 <span class="vb__breadcrumbs__arrow"></span>
-                <span>Blog</span>
+                <span>Blog Yönetimi</span>
             <?php } else { ?>
                 <span class="vb__breadcrumbs__arrow"></span>
-                <a href="/panel/contents">Blog</a>
+                <a href="/panel/contents">Blog Yönetimi</a>
                 <span class="vb__breadcrumbs__arrow"></span>
                 <span><?php echo Sorgu("name", "Pages", "id='$Page_id'", 1)['name'] ?></span>
             <?php } ?>
@@ -40,7 +40,7 @@ $SubMenu = subMenu();
                             <table class="table table-hover" id="pages">
                                 <thead class="thead-default">
                                 <tr>
-                                    <th style="width: 100px">İsim</th>
+                                    <th style="width: 200px">İsim</th>
                                     <th>Açıklama</th>
                                     <th style="width: 70px">Durum</th>
                                     <th style="width: 170px">İşlem</th>

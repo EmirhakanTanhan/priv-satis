@@ -29,16 +29,20 @@ if ($_SESSION['Admin_id']) {
             include "include/general.php";
             break;
 
-        case 'banner':
-            include "include/banner.php";
-            break;
-
         case 'contents':
             include "include/content.php";
             break;
 
         case 'menus':
             include "include/menu.php";
+            break;
+
+        case 'constant':
+            include "include/constant.php";
+            break;
+
+        case 'banner':
+            include "include/banner.php";
             break;
 
         case 'products':

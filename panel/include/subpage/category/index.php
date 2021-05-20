@@ -8,7 +8,7 @@ $Categories = Category();
             <a href="/panel">Panel</a>
             <span>
                 <span class="vb__breadcrumbs__arrow"></span>
-                <span>Kategoriler</span>
+                <span>Kategori Yönetimi</span>
             </span>
         </div>
     </div>

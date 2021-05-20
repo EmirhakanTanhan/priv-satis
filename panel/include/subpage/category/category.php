@@ -7,7 +7,7 @@ $Category_id = UrlRead(3);
         <div class="vb__breadcrumbs__path">
             <a href="/panel">Panel</a>
             <span class="vb__breadcrumbs__arrow"></span>
-            <a href="/panel/category">Kategoriler</a>
+            <a href="/panel/category">Kategori Yönetimi</a>
             <span>
                 <span class="vb__breadcrumbs__arrow"></span>
                 <span><?php echo Category($Category_id) ?></span>
