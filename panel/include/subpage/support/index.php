@@ -1,9 +1,11 @@
 <?php
+var_dump("deneme_ticket_önce");
 $Ticket_id = UrlRead(4);
 if ($Ticket_id) {
     $Ticket = Sorgu("*", "Ticket", "id='$Ticket_id'", 1);
     $Messages = TicketMessage($Ticket_id);
 }
+var_dump("deneme_ticket_sonra");
 
 var_dump("deneme_önce");
 $Pagination_ticket = Paginator(5, "Ticket", UrlRead(3), "", "0");
