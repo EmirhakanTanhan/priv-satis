@@ -14,7 +14,8 @@ if ($_SESSION['Admin_id']) {
 }
 
 include "Doc/css.php";
-if ($_SESSION['Admin_id'] and UrlRead(2) != 'storage') {
+if ($_SESSION['Admin_id'] and in_array(UrlRead(2), array('', 'general', 'contents', 'menus', 'constant', 'banner', 'products',
+        'orders', 'category', 'users', 'blog', 'support', 'stocks', 'payment', 'logs', 'profile')) == true) {
     include "Doc/header.php";
 }
 
@@ -81,17 +82,36 @@ if ($_SESSION['Admin_id']) {
             include "include/log.php";
             break;
 
+        case 'logout':
+            include "include/auth/logout.php";
+            break;
+
+        case 'profile':
+            include "include/auth/profile.php";
+            break;
+
+        default:
+            include "include/404.php";
+            break;
+    }
+} else {
+    switch (UrlRead(2)) {
         case 'login':
             include "include/auth/login.php";
             break;
 
-        case 'logout':
-            include "include/auth/logout.php";
+        case 'forgot-password':
+            include "include/auth/forgotpassword.php";
+            break;
+
+        default:
+            header("location:/panel/login");
             break;
     }
-} else include "include/auth/login.php";
+}
 
-if ($_SESSION['Admin_id'] and UrlRead(2) != 'storage') {
+if ($_SESSION['Admin_id'] and in_array(UrlRead(2), array('', 'general', 'contents', 'menus', 'constant', 'banner', 'products',
+        'orders', 'category', 'users', 'blog', 'support', 'stocks', 'payment', 'logs', 'profile')) == true) {
     include "Doc/footer.php";
     include "Doc/js.php";
 }
