@@ -2,22 +2,13 @@
 if ($_SESSION['Admin_id']) header("location:/panel");
 if ($_POST) {
     $Email = $_POST['email'];
-    $Password = $_POST['password'];
-    if (!$Email) $Error['email'] = 'Email Giriniz';
-    if (!$Password) $Error['password'] = 'Şifre Giriniz';
+    if (!$Email) $Error['empty'] = 'Email giriniz';
     if (!$Error) {
         $Admin = Sorgu("*", "Admin", "email='$Email'", 1);
         if ($Admin) {
-            if (password_verify($Password, $Admin['password'])) {
-                $_SESSION['Admin_id'] = $Admin['id'];
-                $_SESSION['email'] = $Admin['email'];
-                $_SESSION['name'] = $Admin['name'];
-                header("location:/panel");
-            } else {
-                $Error['email'] = 'Email veya Şifre Yanlış';
-            }
+            $Success['email'] = "'$Email' adresine link gönderdik.";
         } else {
-            $Error['email'] = 'Email veya Şifre Yanlış';
+            $Error['email'] = 'Böyle bir email bulunmamaktadır.';
         }
     }
 }
@@ -37,12 +28,16 @@ if ($_POST) {
 
             <div class="card vb__auth__boxContainer">
                 <div class="text-dark font-size-24 mb-4">
-                    <strong>Giriş Yap</strong>
+                    <strong>Şifrenizi Sıfırlayın</strong>
                 </div>
                 <?php
                 if ($Error) {
-                    foreach ($Error as $item) { ?>
-                        <div class="alert alert-danger"><?php echo $item; ?></div>
+                    foreach ($Error as $error) { ?>
+                        <div class="alert alert-danger"><?php echo $error; ?></div>
+                    <?php }
+                } else if ($Success) {
+                    foreach ($Success as $success) { ?>
+                        <div class="alert alert-success"><?php echo $success; ?></div>
                     <?php }
                 } ?>
                 <form action="" method="post" class="mb-4">
@@ -50,15 +45,12 @@ if ($_POST) {
                         <input type="email" name="email" class="form-control" placeholder="Email"
                                value="<?php echo $Email; ?>"/>
                     </div>
-                    <div class="form-group mb-4">
-                        <input type="password" name="password" class="form-control" placeholder="Şifre"/>
-                    </div>
                     <button class="btn btn-primary text-center w-100" type="submit">
-                        <strong>Giriş Yap</strong>
+                        <strong>Şifremi Sıfırla</strong>
                     </button>
                 </form>
-                <a href="/panel/forgot-password" class="vb__utils__link font-size-16">
-                    Şifrenizi mi Unuttunuz ?
+                <a href="/panel/login" class="vb__utils__link font-size-16">
+                    Giriş Ekranına Dön
                 </a>
             </div>
 
@@ -72,3 +64,4 @@ if ($_POST) {
         </div>
     </div>
 </div>
+
