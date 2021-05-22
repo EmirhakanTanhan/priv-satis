@@ -103,7 +103,7 @@ if ($Data) {
                                 <div class="form-group col-md-6">
                                     <div class="form-group col-sm-12">
                                         <input type="hidden"
-                                               id="Dosya"
+                                               id="site_logo"
                                                name="site_logo"
                                                value="<?php echo $Data['logo']['site_logo'] ?>">
                                         <label class="form-label">Site Logo</label>
@@ -111,11 +111,11 @@ if ($Data) {
                                                 data-toggle="modal"
                                                 data-target="#DosyaModal"
                                                 id="DosyaBtn"
-                                                onclick="UrlYukle('/panel/storage/index.php?integration=custom&amp;type=files&amp;Input=Dosya')"
+                                                onclick="UrlYukle('/panel/storage/index.php?integration=custom&amp;type=files&amp;Input=site_logo')"
                                                 class="btn btn-light btn-block btn-xs">Seçiniz
                                         </button>
                                         <div id="ResimBilgi" class="mt-1" style="text-align: center">
-                                            <img src="<?php echo $Data['logo']['site_logo'] ?>" id="imgDosya"
+                                            <img src="<?php echo $Data['logo']['site_logo'] ?>" id="imgsite_logo"
                                                  style="height: 120px;max-width: 150px;object-fit: contain"/>
                                             <p class="text-center"
                                                id="DosyaText"><?php echo substr($Data['logo']['site_logo'], strrpos($Data['logo']['site_logo'], '/') + 1); ?></p>
@@ -125,7 +125,7 @@ if ($Data) {
                                 <div class="form-group col-md-6">
                                     <div class="form-group col-sm-12">
                                         <input type="hidden"
-                                               id="Dosya"
+                                               id="site_favicon"
                                                name="site_favicon"
                                                value="<?php echo $Data['logo']['site_favicon'] ?>">
                                         <label class="form-label">Site İkon</label>
@@ -133,11 +133,11 @@ if ($Data) {
                                                 data-toggle="modal"
                                                 data-target="#DosyaModal"
                                                 id="DosyaBtn"
-                                                onclick="UrlYukle('/panel/storage/index.php?integration=custom&amp;type=files&amp;Input=Dosya')"
+                                                onclick="UrlYukle('/panel/storage/index.php?integration=custom&amp;type=files&amp;Input=site_favicon')"
                                                 class="btn btn-light btn-block btn-xs">Seçiniz
                                         </button>
                                         <div id="ResimBilgi" class="mt-1" style="text-align: center">
-                                            <img src="<?php echo $Data['logo']['site_favicon'] ?>" id="imgDosya"
+                                            <img src="<?php echo $Data['logo']['site_favicon'] ?>" id="imgsite_favicon"
                                                  style="height: 120px;max-width: 150px;object-fit: contain"/>
                                             <p class="text-center"
                                                id="DosyaText"><?php echo substr($Data['logo']['site_favicon'], strrpos($Data['logo']['site_favicon'], '/') + 1); ?></p>
