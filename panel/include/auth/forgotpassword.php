@@ -16,7 +16,7 @@ if ($_POST) {
 <div class="vb__layout__content">
     <div class="vb__auth__authContainer">
         <div class="vb__auth__topbar">
-            <div class="vb__auth__logoContainer">
+            <div class="vb__auth__logoContainer" style="margin:0 auto">
                 <div class="vb__auth__logoContainer__name">Panel</div>
                 <div class="vb__auth__logoContainer__descr">
                     <a href="https://satis.emirhakan.com/">satis.emirhakan.com</a>

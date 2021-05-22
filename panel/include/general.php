@@ -92,6 +92,18 @@ if ($Data) {
                                       rows="3"><?php echo $Data['seo']['site_keywords']; ?></textarea>
                                 </div>
                             </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="facebook">Site Logo</label>
+                                    <input type="text" class="form-control" name="facebook" placeholder=""
+                                           id="facebook" value="<?php echo $Data['social']['facebook']; ?>"/>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="twitter">Site İkon</label>
+                                    <input type="text" class="form-control" name="twitter" placeholder=""
+                                           id="twitter" value="<?php echo $Data['social']['twitter']; ?>"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
