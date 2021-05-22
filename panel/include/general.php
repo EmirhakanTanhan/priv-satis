@@ -3,6 +3,9 @@ $Data = Post($_POST);
 
 if ($Data) {
 
+    $Logo['site_logo'] = $Data["site_logo"];
+    $Logo['site_favicon'] = $Data["site_favicon"];
+
     $Seo['site_title'] = $Data["site_title"];
     $Seo['site_description'] = $Data["site_description"];
     $Seo['site_keywords'] = $Data["site_keywords"];
@@ -29,6 +32,7 @@ if ($Data) {
     $InnerCode['script'] = $Data['site_script'];
 
     $Query = Process("update", "Settings", array(
+        "logo" => json_encode($Logo, JSON_UNESCAPED_UNICODE),
         "seo" => json_encode($Seo, JSON_UNESCAPED_UNICODE),
         "contact" => json_encode($Contact, JSON_UNESCAPED_UNICODE),
         "social" => json_encode($Social, JSON_UNESCAPED_UNICODE),
@@ -39,6 +43,8 @@ if ($Data) {
     if ($Query) header("location:/panel/general#o"); else  header("location:/panel/general#n");
 } else {
     $Data = Sorgu("*", "Settings", "id=1", 1);
+
+    $Data['logo'] = json_decode($Data['logo'], true);
     $Data['seo'] = json_decode($Data['seo'], true);
     $Data['contact'] = json_decode($Data['contact'], true);
     $Data['social'] = json_decode($Data['social'], true);
@@ -95,14 +101,48 @@ if ($Data) {
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="facebook">Site Logo</label>
-                                    <input type="text" class="form-control" name="facebook" placeholder=""
-                                           id="facebook" value="<?php echo $Data['social']['facebook']; ?>"/>
+                                    <div class="form-group col-sm-12">
+                                        <input type="hidden"
+                                               id="Dosya"
+                                               name="site_logo"
+                                               value="<?php echo $Data['logo']['site_logo'] ?>">
+                                        <label class="form-label">Site Logo</label>
+                                        <button type="button"
+                                                data-toggle="modal"
+                                                data-target="#DosyaModal"
+                                                id="DosyaBtn"
+                                                onclick="UrlYukle('/panel/storage/index.php?integration=custom&amp;type=files&amp;Input=Dosya')"
+                                                class="btn btn-light btn-block btn-xs">Seçiniz
+                                        </button>
+                                        <div id="ResimBilgi" class="mt-1" style="text-align: center">
+                                            <img src="<?php echo $Data['logo']['site_logo'] ?>" id="imgDosya"
+                                                 style="height: 120px;max-width: 150px;object-fit: contain"/>
+                                            <p class="text-center"
+                                               id="DosyaText"><?php echo substr($Data['logo']['site_logo'], strrpos($Data['logo']['site_logo'], '/') + 1); ?></p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="twitter">Site İkon</label>
-                                    <input type="text" class="form-control" name="twitter" placeholder=""
-                                           id="twitter" value="<?php echo $Data['social']['twitter']; ?>"/>
+                                    <div class="form-group col-sm-12">
+                                        <input type="hidden"
+                                               id="Dosya"
+                                               name="site_favicon"
+                                               value="<?php echo $Data['logo']['site_favicon'] ?>">
+                                        <label class="form-label">Site İkon</label>
+                                        <button type="button"
+                                                data-toggle="modal"
+                                                data-target="#DosyaModal"
+                                                id="DosyaBtn"
+                                                onclick="UrlYukle('/panel/storage/index.php?integration=custom&amp;type=files&amp;Input=Dosya')"
+                                                class="btn btn-light btn-block btn-xs">Seçiniz
+                                        </button>
+                                        <div id="ResimBilgi" class="mt-1" style="text-align: center">
+                                            <img src="<?php echo $Data['logo']['site_favicon'] ?>" id="imgDosya"
+                                                 style="height: 120px;max-width: 150px;object-fit: contain"/>
+                                            <p class="text-center"
+                                               id="DosyaText"><?php echo substr($Data['logo']['site_favicon'], strrpos($Data['logo']['site_favicon'], '/') + 1); ?></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -149,10 +189,10 @@ if ($Data) {
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-4">
-                                <strong>Site İçi Script Kodları</strong>
+                                <strong>Script Kodları</strong>
                             </h4>
                             <div class="form-row">
-                                <label for="site_script">Script Kodları</label>
+                                <label for="site_script">.js Kodları</label>
                                 <textarea class="form-control" name="site_script" id="site_script" cols="30"
                                           rows="8"><?php echo $Data['site_script']; ?></textarea>
                             </div>
@@ -253,10 +293,10 @@ if ($Data) {
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-4">
-                                <strong>Site İçi Stil Kodları</strong>
+                                <strong>Style Kodları</strong>
                             </h4>
                             <div class="form-group">
-                                <label for="site_style">CSS Kodları</label>
+                                <label for="site_style">.css Kodları</label>
                                 <textarea class="form-control" name="site_style" id="site_style" cols="30"
                                           rows="8"><?php echo $Data['site_style']; ?></textarea>
                             </div>
