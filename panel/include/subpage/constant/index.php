@@ -57,7 +57,7 @@ $Constants = Sorgu("*", "Constant");
                                     foreach ($Constants as $constant) { ?>
                                             <tr>
                                             <td><img src="<?php echo $constant['image'] ?>" alt=""
-                                                     style="max-height: 100px"></td>
+                                                     style="max-height: 100px; max-width: 120px"></td>
                                             <td><?php echo $constant['name'] ?></td>
                                             <td>
                                                 <a href="/panel/constant/edit/<?php echo $constant['id'] ?>"
