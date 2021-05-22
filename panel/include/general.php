@@ -63,8 +63,9 @@ if ($Data) {
             </div>
         </div>
         <div class="vb__utils__content">
-            <div class="row">
-                <div class="col-md-6">
+            <!--1-->
+            <div class="form-row col-md-6 general_flex_left">
+                <div class="col-md-12">
                     <div class="card" style="padding-bottom: 15px">
                         <div class="card-body">
                             <h4 class="mb-4">
@@ -107,8 +108,7 @@ if ($Data) {
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-4">
@@ -145,8 +145,24 @@ if ($Data) {
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-6">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-4">
+                                <strong>Site İçi Script Kodları</strong>
+                            </h4>
+                            <div class="form-row">
+                                <label for="site_script">Script Kodları</label>
+                                <textarea class="form-control" name="site_script" id="site_script" cols="30"
+                                          rows="8"><?php echo $Data['site_script']; ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--2-->
+            <div class="form-row col-md-6 general_flex_right">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-4">
@@ -192,7 +208,7 @@ if ($Data) {
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-4">
@@ -237,19 +253,12 @@ if ($Data) {
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-4">
-                                <strong>Site İçi Kodlar</strong>
+                                <strong>Site İçi Stil Kodları</strong>
                             </h4>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="site_script">Script Kodları</label>
-                                    <textarea class="form-control" name="site_script" id="site_script" cols="30"
-                                              rows="8"><?php echo $Data['site_script']; ?></textarea>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="site_style">CSS Kodları</label>
-                                    <textarea class="form-control" name="site_style" id="site_style" cols="30"
-                                              rows="8"><?php echo $Data['site_style']; ?></textarea>
-                                </div>
+                            <div class="form-group">
+                                <label for="site_style">CSS Kodları</label>
+                                <textarea class="form-control" name="site_style" id="site_style" cols="30"
+                                          rows="8"><?php echo $Data['site_style']; ?></textarea>
                             </div>
                         </div>
                     </div>

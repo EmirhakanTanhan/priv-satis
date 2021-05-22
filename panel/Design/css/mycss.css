@@ -60,3 +60,13 @@
 #Galeri .move img{
     cursor: move;
 }
+
+.general_flex_left {
+    padding: 0 5px 0 0 !important;
+    margin-right: 11px !important;
+    display: inline-flex !important;
+}
+.general_flex_right {
+    padding: 0 0 0 5px !important;
+    display: inline-flex !important;
+}
