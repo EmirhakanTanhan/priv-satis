@@ -110,18 +110,6 @@ $AdminList = Sorgu("*", "Admin");
                 eyeOpenClass: 'fe fe-eye',
                 eyeCloseClass: 'fe fe-eye-off',
             })
-
-            $('#notify-warning').on('click', function () {
-                $.notify(
-                    {
-                        title: '<strong>Heads up!</strong>',
-                        message: 'You can use any of bootstraps other alert styles as well by default.',
-                    },
-                    {
-                        type: 'warning',
-                    },
-                )
-            })
         })
     })(jQuery)
 </script>

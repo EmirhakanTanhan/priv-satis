@@ -267,7 +267,7 @@ function SendMail($Verification_id)
 }
 
 function GetLink($Length) {
-    //$Length is a number
+    //$Length is integer
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $randomString = '';
 
