@@ -13,15 +13,21 @@ if ($_SESSION['Admin_id']) {
     require "../_system/log.php";
 }
 
-include "Doc/css.php";
-if ($_SESSION['Admin_id'] and in_array(UrlRead(2), array('', 'general', 'contents', 'menus', 'constant', 'banner', 'products',
-        'orders', 'category', 'users', 'blog', 'support', 'stocks', 'payment', 'logs', 'profile')) == true) {
-    include "Doc/header.php";
+if (UrlRead(2) != 'api') {
+    include "Doc/css.php";
+    if ($_SESSION['Admin_id'] and in_array(UrlRead(2), array('', 'general', 'contents', 'menus', 'constant', 'banner', 'products',
+            'orders', 'category', 'users', 'blog', 'support', 'stocks', 'payment', 'logs', 'profile')) == true) {
+        include "Doc/header.php";
+    }
 }
 
 
 if ($_SESSION['Admin_id']) {
     switch (UrlRead(2)) {
+        case 'api':
+            include "include/api/api.php";
+            break;
+
         case '':
             include "include/index.php";
             break;

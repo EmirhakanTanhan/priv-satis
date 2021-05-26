@@ -66,6 +66,8 @@ class Assets
 </body>
 </html>';
 
+
+
         $mail = new PHPMailer();
         $mail->isSMTP();
         $mail->IsHTML(true);

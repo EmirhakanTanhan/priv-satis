@@ -116,7 +116,7 @@ if ($Data) {
                                         </button>
                                         <div id="ResimBilgi" class="mt-1" style="text-align: center">
                                             <img src="<?php echo $Data['logo']['site_logo'] ?>" id="imgsite_logo"
-                                                 style="height: 120px;max-width: 150px;object-fit: contain"/>
+                                                 style="height: 100px;max-width: 150px;object-fit: contain"/>
                                             <p class="text-center"
                                                id="DosyaText"><?php echo substr($Data['logo']['site_logo'], strrpos($Data['logo']['site_logo'], '/') + 1); ?></p>
                                         </div>
@@ -138,7 +138,7 @@ if ($Data) {
                                         </button>
                                         <div id="ResimBilgi" class="mt-1" style="text-align: center">
                                             <img src="<?php echo $Data['logo']['site_favicon'] ?>" id="imgsite_favicon"
-                                                 style="height: 120px;max-width: 150px;object-fit: contain"/>
+                                                 style="height: 50px;max-width: 150px;object-fit: contain"/>
                                             <p class="text-center"
                                                id="DosyaText"><?php echo substr($Data['logo']['site_favicon'], strrpos($Data['logo']['site_favicon'], '/') + 1); ?></p>
                                         </div>
@@ -148,60 +148,7 @@ if ($Data) {
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mb-4">
-                                <strong>İletişim</strong>
-                            </h4>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="address">Adres</label>
-                                <div class="col-md-9">
-                                    <textarea class="form-control" name="address" id="address" cols="30"
-                                              rows="3"><?php echo $Data['contact']['address']; ?></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="email">Email</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="email" placeholder=""
-                                           id="email" value="<?php echo $Data['contact']['email']; ?>"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="phone">Telefon</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="phone" placeholder=""
-                                           id="phone" value="<?php echo $Data['contact']['phone']; ?>"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="whatsapp">WhatsApp</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="whatsapp" placeholder=""
-                                           id="whatsapp" value="<?php echo $Data['contact']['whatsapp']; ?>"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mb-4">
-                                <strong>Script Kodları</strong>
-                            </h4>
-                            <div class="form-row">
-                                <label for="site_script">.js Kodları</label>
-                                <textarea class="form-control" name="site_script" id="site_script" cols="30"
-                                          rows="8"><?php echo $Data['site_script']; ?></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--2-->
-            <div class="form-row col-md-6 general_flex_right">
+
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
@@ -242,6 +189,46 @@ if ($Data) {
                                     <label for="pinterest">Pinterest</label>
                                     <input type="text" class="form-control" name="pinterest" placeholder=""
                                            id="pinterest" value="<?php echo $Data['social']['pinterest']; ?>"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--2-->
+            <div class="form-row col-md-6 general_flex_right">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-4">
+                                <strong>İletişim</strong>
+                            </h4>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="address">Adres</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" name="address" id="address" cols="30"
+                                              rows="3"><?php echo $Data['contact']['address']; ?></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="email">Email</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="email" placeholder=""
+                                           id="email" value="<?php echo $Data['contact']['email']; ?>"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="phone">Telefon</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="phone" placeholder=""
+                                           id="phone" value="<?php echo $Data['contact']['phone']; ?>"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="whatsapp">WhatsApp</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="whatsapp" placeholder=""
+                                           id="whatsapp" value="<?php echo $Data['contact']['whatsapp']; ?>"/>
                                 </div>
                             </div>
                         </div>
@@ -293,12 +280,19 @@ if ($Data) {
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-4">
-                                <strong>Style Kodları</strong>
+                                <strong>Site İçi Kodlar</strong>
                             </h4>
-                            <div class="form-group">
-                                <label for="site_style">.css Kodları</label>
-                                <textarea class="form-control" name="site_style" id="site_style" cols="30"
-                                          rows="8"><?php echo $Data['site_style']; ?></textarea>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="site_style">Style (.css) Kodları</label>
+                                    <textarea class="form-control" name="site_style" id="site_style" cols="30"
+                                              rows="8"><?php echo $Data['site_style']; ?></textarea>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="site_script">Script (.js) Kodları</label>
+                                    <textarea class="form-control" name="site_script" id="site_script" cols="30"
+                                              rows="8"><?php echo $Data['site_script']; ?></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
