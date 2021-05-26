@@ -53,6 +53,9 @@ class Assets
           <tr>
             ' . $Data['message'] . '
           </tr>
+          <tr>
+            ' . $Data['link'] . '
+          </tr>
          
         </tbody>
       </table>

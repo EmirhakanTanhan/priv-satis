@@ -70,6 +70,8 @@ function UrlRead($Place = NULL)
         return $_SERVER['REQUEST_URI'];
     else if ($Place == "all")
         return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    else if ($Place == "core")
+        return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
     else
         return explode("/", $_SERVER['REQUEST_URI'])[$Place];
 }
@@ -243,6 +245,38 @@ function subMenu()
     }
 
     return $Data;
+}
+
+function SendMail($Verification_id)
+{
+    require "Assets.php";
+    $asset = new Assets();
+
+    $Data['email'] = Sorgu("email", "Verification", "id='$Verification_id'", 1)['email'];
+    $Data['subject'] = Sorgu("title", "Verification", "id='$Verification_id'", 1)['title'];
+    $Data['message'] = Sorgu("description", "Verification", "id='$Verification_id'", 1)['description'];
+    $Data['link'] = Sorgu("link", "Verification", "id='$Verification_id'", 1)['link'];
+
+
+    $asset->MailGonder(array(
+        "email" => $Data['email'],
+        "subject" => $Data['subject'],
+        "message" => $Data['message'],
+        "link" => $Data['link'],
+    ));
+}
+
+function GetLink($Length) {
+    //$Length is a number
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';
+
+    for ($i = 0; $i < $Length; $i++) {
+        $index = rand(0, strlen($characters) - 1);
+        $randomString .= $characters[$index];
+    }
+
+    return $randomString;
 }
 
 function Post($Data = NULL)
