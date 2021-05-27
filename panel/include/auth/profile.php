@@ -1,6 +1,5 @@
 <?php
 $Admin = Sorgu("*", "Admin", "id='$_SESSION[Admin_id]'", 1);
-$AdminList = Sorgu("*", "Admin");
 ?>
 
 <div class="vb__layout__content">

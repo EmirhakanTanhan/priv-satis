@@ -5,6 +5,9 @@ $("#AdminEdit").submit(function () {
             case 'empty':
                 new Notification("Lütfen Bütün Boşlukları Doldurun", 1);
                 break;
+            case 'unchanged':
+                new Notification("Değiştirilecek Bir Değer Bulunmamaktadır", 1);
+                break;
             case 'invalid_email':
                 new Notification("Geçersiz Bir Email Adresi Girdiniz");
                 break;
@@ -14,8 +17,11 @@ $("#AdminEdit").submit(function () {
             case 'invalid_pass':
                 new Notification("Hatalı Bir Şifre Girdiniz");
                 break;
-            case 'create_link_success':
-                new Notification("Mail Oluşturuldu", 0);
+            case 'success_edit_name':
+                new Notification("İşleminiz Başarıyla Gerçekleştirildi", 0);
+                break;
+            case 'success_ver_req_sent':
+                new Notification("Lütfen "+response.data.EMAIL+" Adresini Onaylayınız.", 0);
                 break;
             default:
                 new Notification("Bilinmeyen Bir Hata Oluştu, Lütfen Daha Sonra Tekrar Deneyiniz.");
