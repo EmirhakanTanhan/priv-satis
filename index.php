@@ -60,10 +60,6 @@ switch (UrlRead(1)) {
         include "include/checkout.php";
         break;
 
-    case 'checkout':
-        include "include/checkout.php";
-        break;
-
     case 'page':
         include "include/page.php";
         break;

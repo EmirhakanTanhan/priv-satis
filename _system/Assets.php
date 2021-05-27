@@ -53,19 +53,19 @@ class Assets
           <tr>
             ' . $Data['message'] . '
           </tr>
+          <a href="' . $Data['link'] . '" target="_blank">Confirm</a>
          
         </tbody>
       </table>
     </div>
     <div style="text-align: center; font-size: 12px; color: #b2b2b5; margin-top: 20px">
-      <p> Bu Mail <a href="satis.me">'.$this->Seo['site_title'].'</a> tarafından hazırlanmıştır. <br>
+      <p> Bu Mail <a href="satis.me">' . $this->Seo['site_title'] . '</a> tarafından hazırlanmıştır. <br>
         </p>
     </div>
   </div>
 </div>
 </body>
 </html>';
-
 
 
         $mail = new PHPMailer();
