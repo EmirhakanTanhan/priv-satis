@@ -4,6 +4,7 @@
     $username = 'u567125998_emirhakan';
     $password = 'cE=9=9;hL6/';
 
-    /*$dbname = 'satis';
+    /*$host = 'localhost';
+    $dbname = 'satis';
     $username = 'root';
     $password = '';*/
