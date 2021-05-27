@@ -1,5 +1,5 @@
 <?php
-require_once 'pdoconfig.php';
+require 'pdoconfig.php';
 
 try {
     $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", "$username", "$password");
