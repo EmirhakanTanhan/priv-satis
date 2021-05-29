@@ -1,5 +1,8 @@
 <?php
-if ($_SESSION['Admin_id']) header("location:/panel");
+$VerUrl = UrlRead(3);
+$VerType = substr($VerUrl, 0, 1);
+$VerId = hexdec(substr($VerUrl, 20));
+
 if ($_POST) {
     $Email = $_POST['email'];
     $Password = $_POST['password'];
@@ -22,6 +25,7 @@ if ($_POST) {
     }
 }
 ?>
+
 <div class="vb__layout__content">
     <div class="vb__auth__authContainer">
         <div class="vb__auth__topbar">
@@ -33,6 +37,13 @@ if ($_POST) {
             </div>
         </div>
         <div class="vb__auth__containerInner">
+
+            <div class="container pl-5 pr-5 pb-5 mb-auto text-dark font-size-32 text-center">
+                <div class="font-weight-bold mb-3">Tebrikler!</div>
+                <div class="text-gray-6 font-size-24">
+                    Email adresiniz onaylandı.
+                </div>
+            </div>
 
             <div class="card vb__auth__boxContainer">
                 <div class="text-dark font-size-24 mb-4">

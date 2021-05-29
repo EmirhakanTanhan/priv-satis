@@ -249,6 +249,11 @@ function subMenu()
 
 function SendMail($Verification_id)
 {
+    /* Verification types;
+     * A: Confirm Your Email Address
+     * B: Reset Your Email Address
+     *
+    */
     require "Assets.php";
     $asset = new Assets();
 
@@ -256,7 +261,6 @@ function SendMail($Verification_id)
     $Data['subject'] = Sorgu("title", "Verification", "id='$Verification_id'", 1)['title'];
     $Data['message'] = Sorgu("description", "Verification", "id='$Verification_id'", 1)['description'];
     $Data['link'] = Sorgu("link", "Verification", "id='$Verification_id'", 1)['link'];
-
 
     $asset->MailGonder(array(
         "email" => $Data['email'],
