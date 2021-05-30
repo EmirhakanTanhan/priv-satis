@@ -36,14 +36,29 @@ $("#AdminEdit").submit(function () {
 })
 
 //$("#VerCheck").submit(function () >>>>post on page load
-$(function () {
-    axios.post('/panel/api/vercheck', $("#VerCheck").serialize()).then(function (response) {
-        console.log(response.data);
-
-    }).catch(function (error) {
-        console.log(error);
-    });
-})
+if (window.location.href.includes("/verification") && !window.location.href.includes("?status=")) {
+    $(function () {
+        axios.post('/panel/api/vercheck', $("#VerCheck").serialize()).then(function (response) {
+            console.log(response.data);
+            switch (response.data.STATUS) {
+                case 'ERR_INVALID_LINK_a':
+                    window.location.href = "/panel/verification/" + response.data.LINK + "?status=" + response.data.STATUS
+                    break;
+                case 'ERR_INVALID_LINK_b':
+                    window.location.href = "/panel/verification/" + response.data.LINK + "?status=" + response.data.STATUS
+                    break;
+                case 'SUCC_APPLY_CHANGE':
+                    window.location.href = "/panel/verification/" + response.data.LINK + "?status=" + response.data.STATUS
+                    break;
+                default:
+                    window.location.href = "/panel/404"
+                    break;
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    })
+}
 
 $("#VerLogin").submit(function () {
     axios.post('/panel/api/verlogin', $("#VerLogin").serialize()).then(function (response) {
@@ -57,6 +72,9 @@ $("#VerLogin").submit(function () {
                 break;
             case 'ERR_INVALID_USER_OR_PASS':
                 new Notification("Email adresi veya şifre hatalı");
+                break;
+            case 'ERR_LOGIN_REQUIRED':
+                new Notification("Giriş yapmanız gerekli");
                 break;
             case 'SUCC_LOGIN':
                 new Notification("Başarıyla giriş yaptınız", 0);

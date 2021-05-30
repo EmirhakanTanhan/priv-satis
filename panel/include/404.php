@@ -8,7 +8,7 @@
                 </div>
                 <div class="font-weight-bold font-size-70 mb-1">404 —</div>
                 <a href="/panel" class="btn btn-outline-primary width-100">
-                    Geri Git
+                    Panele Git
                 </a>
             </div>
         </div>

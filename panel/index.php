@@ -88,6 +88,7 @@ if ($_SESSION['Admin_id']) {
             include "include/log.php";
             break;
 
+
         case 'logout':
             include "include/auth/logout.php";
             break;
@@ -97,7 +98,12 @@ if ($_SESSION['Admin_id']) {
             break;
 
         case 'verification':
-            include "include/verification.php";
+            include "include/auth/verification.php";
+            break;
+
+        case 'login':
+        case 'forgot-password' :
+            header("location:/panel");
             break;
 
         default:
@@ -106,8 +112,8 @@ if ($_SESSION['Admin_id']) {
     }
 } else {
     switch (UrlRead(2)) {
-        case 'verification':
-            include "include/verification.php";
+        case 'api':
+            include "include/api/api.php";
             break;
 
         case 'login':
@@ -116,6 +122,10 @@ if ($_SESSION['Admin_id']) {
 
         case 'forgot-password':
             include "include/auth/forgotpassword.php";
+            break;
+
+        case 'verification':
+            include "include/auth/verification.php";
             break;
 
         default:
