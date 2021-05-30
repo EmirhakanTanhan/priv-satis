@@ -151,7 +151,8 @@ if ($_POST) {
                     <div class="card-body">
                         <div class="d-flex flex-column justify-content-end" style="height: 350px">
                             <div class="vb__g14__contentWrapper vb__customScroll">
-                                <?php foreach ($Messages as $message) {
+                                <?php
+                                foreach ($Messages as $message) {
                                     if ($message['Admin_id']) {
                                         $Admin_name = Query("name", "Admin", "id='$message[Admin_id]'", 1)['name'];
                                         ?>
