@@ -97,7 +97,7 @@ if ($_SESSION['Admin_id']) {
             break;
 
         case 'verification':
-            include "include/verification.php";
+            include "include/auth/verification.php";
             break;
 
         default:
@@ -106,8 +106,8 @@ if ($_SESSION['Admin_id']) {
     }
 } else {
     switch (UrlRead(2)) {
-        case 'verification':
-            include "include/verification.php";
+        case 'api':
+            include "include/api/api.php";
             break;
 
         case 'login':
@@ -116,6 +116,10 @@ if ($_SESSION['Admin_id']) {
 
         case 'forgot-password':
             include "include/auth/forgotpassword.php";
+            break;
+
+        case 'verification':
+            include "include/auth/verification.php";
             break;
 
         default:
