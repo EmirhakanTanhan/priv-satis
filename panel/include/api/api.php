@@ -103,10 +103,10 @@ if ($Admin_id) {
 
             switch (true) {
                 case (empty($VerLink) or strlen($VerLink) < 20):
-                    $Return['STATUS'] = "ERR_INVALID_LINK";
+                    $Return['STATUS'] = "ERR_INVALID_LINK_a";
                     break;
-                case (!$VerDB = Query("*", "Verification", "id='$VerId'", 1) or $VerLink != $VerDB['link']):
-                    $Return['STATUS'] = "ERR_INVALID_LINK";
+                case (!$VerDB = Query("*", "Verification", "id='$VerId'", 1) or $VerUrl != $VerDB['link']):
+                    $Return['STATUS'] = "ERR_INVALID_LINK_b";
                     break;
             }
     }
