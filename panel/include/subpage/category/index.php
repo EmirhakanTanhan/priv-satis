@@ -61,7 +61,7 @@ $Categories = Category();
                                 <tbody class="panel_table_normal">
                                 <?php
                                 foreach ($Categories as $category) {
-                                    $NumberOfCategories = Sorgu("COUNT(id) AS id", "Product", "Category_id=$category[id]", 1)['id'];
+                                    $NumberOfCategories = Query("COUNT(id) AS id", "Product", "Category_id=$category[id]", 1)['id'];
                                     ?>
                                     <tr>
                                         <td><?php echo $category['name'] ?></td>

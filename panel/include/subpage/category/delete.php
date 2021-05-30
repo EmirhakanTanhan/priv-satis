@@ -1,7 +1,7 @@
 <?php
 $Category_id = UrlRead(4);
 
-$Products = Sorgu("id", "Product", "Category_id='$Category_id'");
+$Products = Query("id", "Product", "Category_id='$Category_id'");
 foreach ($Products as $product) {
     $Query = Process("delete","Product","","id='$product[id]'");
 }

@@ -1,5 +1,5 @@
 <?php
-$Orders = Sorgu("*", "Orders");
+$Orders = Query("*", "Orders");
 ?>
 <div class="vb__layout__content">
     <div class="vb__breadcrumbs">

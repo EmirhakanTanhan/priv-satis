@@ -6,11 +6,11 @@ $Ticket_id = UrlRead(2);
 if (!is_numeric($Ticket_id))
     header("location:/404");
 
-$Ticket = Sorgu("*", "Ticket", "id='$Ticket_id' AND Users_id='$User[id]'", 1);
+$Ticket = Query("*", "Ticket", "id='$Ticket_id' AND Users_id='$User[id]'", 1);
 if (!$Ticket)
     header("location:/404");
 
-$Ticket_title = Sorgu("name", "Ticket", "id='$Ticket_id'", 1)['name'];
+$Ticket_title = Query("name", "Ticket", "id='$Ticket_id'", 1)['name'];
 $Messages = TicketMessage($Ticket_id);
 
 $x = 0;
@@ -36,7 +36,7 @@ $y = 0;
             <?php
             foreach ($Messages as $message) {
                 if ($message['Admin_id']) {
-                    $Admin_name = Sorgu("name", "Admin", "id='$message[Admin_id]'", 1)['name'];
+                    $Admin_name = Query("name", "Admin", "id='$message[Admin_id]'", 1)['name'];
                     ?>
                     <li class="comments__item">
                         <?php if (!$x == 1) { ?>

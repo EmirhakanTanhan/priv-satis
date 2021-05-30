@@ -28,7 +28,7 @@ if ($_POST) {
 
     if ($Query) header("location:/panel/payment/edit/$Payment_id#o"); else header("location:/panel/payment/edit/$Payment_id#n");
 } else {
-    $Payment = Sorgu("*", "Payment", "id='$Payment_id'", 1);
+    $Payment = Query("*", "Payment", "id='$Payment_id'", 1);
 }
 ?>
 

@@ -5,7 +5,7 @@ $User = User();
 $Order_id = UrlRead(2);
 if (!is_numeric($Order_id)) header("location:/404");
 
-$Order = Sorgu("*", "Orders", "id='$Order_id' AND Users_id='$User[id]'", 1);
+$Order = Query("*", "Orders", "id='$Order_id' AND Users_id='$User[id]'", 1);
 if (!$Order) header("location:/404");
 
 $Basket = Basket($Order_id);

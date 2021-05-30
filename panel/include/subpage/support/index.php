@@ -1,13 +1,13 @@
 <?php
 $Ticket_id = UrlRead(4);
 if ($Ticket_id) {
-    $Ticket = Sorgu("*", "Ticket", "id='$Ticket_id'", 1);
+    $Ticket = Query("*", "Ticket", "id='$Ticket_id'", 1);
     $Messages = TicketMessage($Ticket_id);
 }
 
 $Pagination_ticket = Paginator(5, "Ticket", UrlRead(3), "", "0");
 if ($Pagination_ticket)
-    $Tickets = Sorgu("*", "Ticket", "", "$Pagination_ticket[Start],$Pagination_ticket[Limit]", "id DESC");
+    $Tickets = Query("*", "Ticket", "", "$Pagination_ticket[Start],$Pagination_ticket[Limit]", "id DESC");
 
 
 if ($_POST) {
@@ -147,19 +147,17 @@ if ($_POST) {
                                 </h5>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="d-flex flex-column justify-content-end" style="height: 350px">
-                                <div class="vb__g14__contentWrapper vb__customScroll">
-                                    <?php foreach ($Messages as $message) {
-                                        if ($message['Admin_id']) {
-                                            $Admin_name = Sorgu("name", "Admin", "id='$message[Admin_id]'", 1)['name'];
-                                            ?>
-                                            <div class="vb__g14__message">
-                                                <div class="vb__g14__messageContent">
-                                                    <div class="text-gray-4 font-size-12 text-uppercase"><?php echo $Admin_name . " | " . date_format(date_create($message['history']), "Y/m/d, H:i"); ?>
-                                                    </div>
-                                                    <div><?php echo $message['description']; ?></div>
-                                                </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex flex-column justify-content-end" style="height: 350px">
+                            <div class="vb__g14__contentWrapper vb__customScroll">
+                                <?php foreach ($Messages as $message) {
+                                    if ($message['Admin_id']) {
+                                        $Admin_name = Query("name", "Admin", "id='$message[Admin_id]'", 1)['name'];
+                                        ?>
+                                        <div class="vb__g14__message">
+                                            <div class="vb__g14__messageContent">
+                                                <div class="text-gray-4 font-size-12 text-uppercase"><?php echo $Admin_name . " | " . date_format(date_create($message['history']), "Y/m/d, H:i"); ?> </div>
                                             </div>
                                         <?php }
                                         if ($message['Users_id']) { ?>

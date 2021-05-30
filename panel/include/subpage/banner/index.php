@@ -1,5 +1,5 @@
 <?php
-$Banners = Sorgu("*", "Banner");
+$Banners = Query("*", "Banner");
 ?>
 <div class="vb__layout__content">
     <div class="vb__breadcrumbs">

@@ -1,6 +1,6 @@
 <?php
 
-function Sorgu($Select, $Table, $Where = NULL, $Limit = NULL, $Order = NULL)
+function Query($Select, $Table, $Where = NULL, $Limit = NULL, $Order = NULL)
 {
     global $db;
     if ($Where) $_Where = " WHERE $Where";
@@ -36,7 +36,7 @@ function Process($Operation, $Table, $Data = NULL, $Where = NULL)
     }
 
     if ($Operation == "update" or $Operation == "delete") {
-        $id = Sorgu("id", $Table, $Where, 1)['id'];
+        $id = Query("id", $Table, $Where, 1)['id'];
         array_push($Value, $id);
     }
 
@@ -82,9 +82,9 @@ function Product($Category_id = NULL)
     if ($Category_id) {
         $Where = "id='$Category_id'";
     }
-    $Data = Sorgu("*", "Category", $Where);
+    $Data = Query("*", "Category", $Where);
     foreach ($Data as $index => $category) {
-        $Data[$index]['product'] = Sorgu("*", "Product", "Category_id='$category[id]'");
+        $Data[$index]['product'] = Query("*", "Product", "Category_id='$category[id]'");
     }
     return $Data;
 }
@@ -95,7 +95,7 @@ function User($User_given_id = NULL)
         $User_id = $User_given_id;
     else
         $User_id = $_SESSION['User_id'];
-    $Data = Sorgu("*", "Users", "id='$User_id'", 1);
+    $Data = Query("*", "Users", "id='$User_id'", 1);
 
     return $Data;
 }
@@ -110,9 +110,9 @@ function Basket($Orders_id = NULL, $Users_id = NULL)
     $Total = 0;
 
     if ($Orders_id) $Where = "AND Orders_id='$Orders_id'"; else $Where = "AND Orders_id IS NULL";
-    $Data = Sorgu("p.id, p.status, p.Category_id, p.name, p.discount, p.stock, p.type, p.description, p.link, p.image, b.history, b.price, b.discounted_price", "Basket AS b, Product AS p", "b.Users_id='$User_id' AND p.id=b.Product_id  $Where");
+    $Data = Query("p.id, p.status, p.Category_id, p.name, p.discount, p.stock, p.type, p.description, p.link, p.image, b.history, b.price, b.discounted_price", "Basket AS b, Product AS p", "b.Users_id='$User_id' AND p.id=b.Product_id  $Where");
     if ($Data) {
-        $Count = Sorgu("COUNT(id) AS id", "Basket", "Users_id='$User_id' $Where", 1)['id'];
+        $Count = Query("COUNT(id) AS id", "Basket", "Users_id='$User_id' $Where", 1)['id'];
         foreach ($Data as $index => $datum) {
             if ($datum['discounted_price'])
                 $Price = number_format($datum["discounted_price"], "2");
@@ -129,11 +129,11 @@ function Basket($Orders_id = NULL, $Users_id = NULL)
 function Category($Category_id = NULL, $Category_name = NULL)
 {
     if ($Category_id)
-        $Data = Sorgu("name", "Category", "id='$Category_id'", 1)["name"];
+        $Data = Query("name", "Category", "id='$Category_id'", 1)["name"];
     else if ($Category_name)
-        $Data = Sorgu("id", "Category", "name='$Category_name'", 1)["id"];
+        $Data = Query("id", "Category", "name='$Category_name'", 1)["id"];
     else
-        $Data = Sorgu("id,name,description", "Category");
+        $Data = Query("id,name,description", "Category");
 
     return $Data;
 }
@@ -143,16 +143,16 @@ function Stock($Product_id = NULL)
     $Where = NULL;
     if ($Product_id)
         $Where = "AND s.Product_id = '$Product_id'";
-    $Data = Sorgu("s.id,s.history,s.status,s.Product_id,s.description,p.image,p.name,p.Category_id", "Stock AS s, Product AS p", "p.id=s.Product_id $Where");
+    $Data = Query("s.id,s.history,s.status,s.Product_id,s.description,p.image,p.name,p.Category_id", "Stock AS s, Product AS p", "p.id=s.Product_id $Where");
     return $Data;
 }
 
 function PaymentMethod($Payment_id = NULL)
 {
     if ($Payment_id)
-        $Data = Sorgu("name", "Payments", "id='$Payment_id'", 1)["name"];
+        $Data = Query("name", "Payments", "id='$Payment_id'", 1)["name"];
     else
-        $Data = Sorgu("id,name", "Payments");
+        $Data = Query("id,name", "Payments");
 
     return $Data;
 }
@@ -177,7 +177,7 @@ function Paginator($Limit, $Table, $PageUrl, $Where = NULL, $User = 1)
     }
     if ($Where) $_Where = "AND $Where";
 
-    $Count = Sorgu("COUNT(id) AS id", $Table, $_User . $_Where, 1)['id'];
+    $Count = Query("COUNT(id) AS id", $Table, $_User . $_Where, 1)['id'];
     if ($Count) {
         $Page = $PageUrl ? $PageUrl : 1;
         $Start = ($Page - 1) * $Limit;
@@ -203,7 +203,7 @@ function Paginator($Limit, $Table, $PageUrl, $Where = NULL, $User = 1)
 
 function TicketMessage($Ticket_id)
 {
-    $Messages = Sorgu("*", "Ticket_message", "Ticket_id='$Ticket_id'", "", "id ASC");
+    $Messages = Query("*", "Ticket_message", "Ticket_id='$Ticket_id'", "", "id ASC");
 
     return $Messages;
 }
@@ -231,7 +231,7 @@ function getUserIP()
 
 function subMenu()
 {
-    $Pages = Sorgu("id, Pages_id", "Pages");
+    $Pages = Query("id, Pages_id", "Pages");
     $count = array();
 
     foreach ($Pages as $index => $page) {
@@ -249,14 +249,18 @@ function subMenu()
 
 function SendMail($Verification_id)
 {
+    /* Verification types;
+     * A: Confirm Your Email Address
+     * B: Reset Your Email Address
+     *
+    */
     require "Assets.php";
     $asset = new Assets();
 
-    $Data['email'] = Sorgu("email", "Verification", "id='$Verification_id'", 1)['email'];
-    $Data['subject'] = Sorgu("title", "Verification", "id='$Verification_id'", 1)['title'];
-    $Data['message'] = Sorgu("description", "Verification", "id='$Verification_id'", 1)['description'];
-    $Data['link'] = Sorgu("link", "Verification", "id='$Verification_id'", 1)['link'];
-
+    $Data['email'] = Query("email", "Verification", "id='$Verification_id'", 1)['email'];
+    $Data['subject'] = Query("title", "Verification", "id='$Verification_id'", 1)['title'];
+    $Data['message'] = Query("description", "Verification", "id='$Verification_id'", 1)['description'];
+    $Data['link'] = Query("link", "Verification", "id='$Verification_id'", 1)['link'];
 
     $asset->MailGonder(array(
         "email" => $Data['email'],

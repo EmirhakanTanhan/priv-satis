@@ -19,7 +19,7 @@ if ($_POST) {
         "Pages_id" => 1
     ), "id='$Page_id'");
 
-    $PicsToDelete = Sorgu("id", "Images", "Pages_id='$Page_id'");
+    $PicsToDelete = Query("id", "Images", "Pages_id='$Page_id'");
 
     if ($PicsToDelete) {
         foreach ($PicsToDelete as $pictodelete) {
@@ -39,8 +39,8 @@ if ($_POST) {
 
     if ($Query or $Query_pic or $PicsToDelete) header("location:/panel/blog/edit/$Page_id#o"); else  header("location:/panel/blog/edit/$Page_id#n");
 } else {
-    $Curr_Page = Sorgu("*", "Pages", "id='$Page_id'", 1);
-    $images = Sorgu("*", "Images", "Pages_id='$Curr_Page[id]'");
+    $Curr_Page = Query("*", "Pages", "id='$Page_id'", 1);
+    $images = Query("*", "Images", "Pages_id='$Curr_Page[id]'");
 }
 ?>
 

@@ -1,6 +1,6 @@
 <?php
 $Product = Product();
-$Banner = Sorgu("*", "Banner");
+$Banner = Query("*", "Banner");
 ?>
 
 <?php if ($Banner) {

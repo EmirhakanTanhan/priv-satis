@@ -1,5 +1,5 @@
 <?php
-$Constants = Sorgu("*", "Constant");
+$Constants = Query("*", "Constant");
 ?>
 
 <div class="vb__layout__content">

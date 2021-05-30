@@ -12,7 +12,7 @@ if ($_POST) {
     ),"id='$Category_id'");
         if ($Query) header("location:/panel/category/edit/$Category_id#o"); else  header("location:/panel/category/edit/$Category_id#n");
 } else {
-    $Category = Sorgu("*", "Category", "id='$Category_id'",1);
+    $Category = Query("*", "Category", "id='$Category_id'",1);
 }
 ?>
 

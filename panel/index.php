@@ -96,12 +96,20 @@ if ($_SESSION['Admin_id']) {
             include "include/auth/profile.php";
             break;
 
+        case 'verification':
+            include "include/verification.php";
+            break;
+
         default:
             include "include/404.php";
             break;
     }
 } else {
     switch (UrlRead(2)) {
+        case 'verification':
+            include "include/verification.php";
+            break;
+
         case 'login':
             include "include/auth/login.php";
             break;

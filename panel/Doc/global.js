@@ -2,29 +2,32 @@ $("#AdminEdit").submit(function () {
     axios.post('/panel/api/adminedit', $("#AdminEdit").serialize()).then(function (response) {
         console.log(response.data);
         switch (response.data.STATUS) {
-            case 'empty':
-                new Notification("Lütfen Bütün Boşlukları Doldurun", 1);
+            case 'ERR_EMPTY':
+                new Notification("Lütfen bütün boşlukları doldurun", 1);
                 break;
-            case 'unchanged':
-                new Notification("Değiştirilecek Bir Değer Bulunmamaktadır", 1);
+            case 'ERR_UNCHANGED':
+                new Notification("Değiştirilecek bir değer bulunmamaktadır", 1);
                 break;
-            case 'invalid_email':
-                new Notification("Geçersiz Bir Email Adresi Girdiniz");
+            case 'ERR_INVALID_EMAIL':
+                new Notification("Geçersiz bir email adresi girdiniz");
                 break;
-            case 'invalid_name':
-                new Notification("Geçersiz Bir İsim Girdiniz");
+            case 'ERR_INVALID_NAME':
+                new Notification("Geçersiz bir isim girdiniz");
                 break;
-            case 'invalid_pass':
-                new Notification("Hatalı Bir Şifre Girdiniz");
+            case 'ERR_INVALID_PASS':
+                new Notification("Hatalı bir şifre girdiniz");
                 break;
-            case 'success_edit_name':
-                new Notification("İşleminiz Başarıyla Gerçekleştirildi", 0);
+            case 'ERR_OVER_REQUEST':
+                new Notification("Aynı anda yalnızca bir özellik değiştirebilirsiniz");
                 break;
-            case 'success_ver_req_sent':
-                new Notification("Lütfen "+response.data.EMAIL+" Adresini Onaylayınız.", 0);
+            case 'SUCC_NAME':
+                new Notification("İşleminiz başarıyla gerçekleştirildi", 0);
+                break;
+            case 'SUCC_VER_REQ_SENT':
+                new Notification("Değişiklikleri tamamlamak için " + response.data.EMAIL + " adresine gelen onaylama linkine gidiniz", 0);
                 break;
             default:
-                new Notification("Bilinmeyen Bir Hata Oluştu, Lütfen Daha Sonra Tekrar Deneyiniz.");
+                new Notification("Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
                 break;
         }
     }).catch(function (error) {
@@ -32,9 +35,43 @@ $("#AdminEdit").submit(function () {
     });
 })
 
-//Alert
+//$("#VerCheck").submit(function () >>>>post on page load
+$(function () {
+    axios.post('/panel/api/vercheck', $("#VerCheck").serialize()).then(function (response) {
+        console.log(response.data);
+
+    }).catch(function (error) {
+        console.log(error);
+    });
+})
+
+$("#VerLogin").submit(function () {
+    axios.post('/panel/api/verlogin', $("#VerLogin").serialize()).then(function (response) {
+        console.log(response.data);
+        switch (response.data.STATUS) {
+            case 'ERR_EMPTY':
+                new Notification("Lütfen bütün boşlukları doldurun", 1);
+                break;
+            case 'ERR_INVALID_EMAIL':
+                new Notification("Geçersiz bir email adresi girdiniz");
+                break;
+            case 'ERR_INVALID_USER_OR_PASS':
+                new Notification("Email adresi veya şifre hatalı");
+                break;
+            case 'SUCC_LOGIN':
+                new Notification("Başarıyla giriş yaptınız", 0);
+                setTimeout(function () {
+                    window.location.href = "/panel"
+                }, 800);
+                break;
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+})
+
+//Alert | status : 0 = success, 1 = warning, 2 = failed
 function Notification(text, status = 2, closeButton = 0) {
-    //status : 0 = success, 1 = warning, 2 = failed
     switch (status) {
         case 0:
             _status = 'success';
