@@ -67,7 +67,6 @@ switch (UrlRead(3)) {
                         "status" => 1
                     ), "id='$VerDB[id]'");
                 }
-
                 if ($Query_apply_changes and $Query_update_status) {
                     session_unset();
                     session_destroy();
@@ -108,10 +107,10 @@ if ($Admin_id) {
                     break;
 
                 case ($Admin['name'] != $name): //Update admin name
-                    $Query_edit_admin = Process("update", "Admin", array(
+                    $Process_edit_admin = Process("update", "Admin", array(
                         "name" => $name
                     ), "id='$Admin_id'");
-                    if ($Query_edit_admin) $Return['STATUS'] = "SUCC_NAME";
+                    if ($Process_edit_admin) $Return['STATUS'] = "SUCC_NAME";
                     break;
 
                 case ($Admin['email'] != $email): //Update admin email
@@ -122,7 +121,7 @@ if ($Admin_id) {
                     $ver_change['Admin'] = array("email" => $email);                                      //------SERVER NAME---|------VER. URL------|VER. TYPE|----RANDOM LINK---|VER. ID HEX BASED INTEGER(added later)
 
                     //Create verification data
-                    $Query_verification = Process("insert", "Verification", array(
+                    $Process_verification = Process("insert", "Verification", array(
                         "status" => 0,
                         "email" => $ver_email,
                         "title" => $ver_title,
@@ -133,12 +132,12 @@ if ($Admin_id) {
                     ));
 
                     //Update link by putting the row's id in the end of the link as hexadecimal value.
-                    $Query_verification_link_update = Process("update", "Verification", array(
-                        "link" => $ver_link . dechex($Query_verification)
-                    ), "id='$Query_verification'");
+                    $Process_verification_link_update = Process("update", "Verification", array(
+                        "link" => $ver_link . dechex($Process_verification)
+                    ), "id='$Process_verification'");
 
-                    if ($Query_verification_link_update and $Query_verification) {
-                        SendMail($Query_verification);
+                    if ($Process_verification_link_update and $Process_verification) {
+                        SendMail($Process_verification);
                         $Return['STATUS'] = "SUCC_VER_REQ_SENT";
                         $Return['EMAIL'] = $ver_email;
                     }

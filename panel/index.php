@@ -88,6 +88,7 @@ if ($_SESSION['Admin_id']) {
             include "include/log.php";
             break;
 
+
         case 'logout':
             include "include/auth/logout.php";
             break;
@@ -98,6 +99,11 @@ if ($_SESSION['Admin_id']) {
 
         case 'verification':
             include "include/auth/verification.php";
+            break;
+
+        case 'login':
+        case 'forgot-password' :
+            header("location:/panel");
             break;
 
         default:
