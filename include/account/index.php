@@ -3,11 +3,11 @@ $User = User();
 
 $Pagination = Paginator(5, "Orders", UrlRead(2));
 if ($Pagination)
-    $Orders = Sorgu("*", "Orders", "Users_id='$User[id]'", "$Pagination[Start],$Pagination[Limit]", "id DESC");
+    $Orders = Query("*", "Orders", "Users_id='$User[id]'", "$Pagination[Start],$Pagination[Limit]", "id DESC");
 
 $Pagination_ticket = Paginator(5, "Ticket", UrlRead(2));
 if ($Pagination_ticket)
-    $Tickets = Sorgu("*", "Ticket", "Users_id='$User[id]'", "$Pagination_ticket[Start],$Pagination_ticket[Limit]", "id DESC");
+    $Tickets = Query("*", "Ticket", "Users_id='$User[id]'", "$Pagination_ticket[Start],$Pagination_ticket[Limit]", "id DESC");
 ?>
 
 <!-- page title -->

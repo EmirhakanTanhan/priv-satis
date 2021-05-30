@@ -14,7 +14,7 @@ if ($_POST) {
     ), "id='$Banner_id'");
     if ($Query) header("location:/panel/banner/edit/$Banner_id#o"); else  header("location:/panel/banner/edit/$Banner_id#n");
 } else {
-    $Banner = Sorgu("*", "Banner", "id='$Banner_id'", 1);
+    $Banner = Query("*", "Banner", "id='$Banner_id'", 1);
 }
 ?>
 <div class="vb__layout__content">

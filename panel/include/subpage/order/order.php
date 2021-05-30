@@ -1,7 +1,7 @@
 <?php
 $Order_id = UrlRead(3);
 
-$Order = Sorgu("*", "Orders", "id='$Order_id'", 1);
+$Order = Query("*", "Orders", "id='$Order_id'", 1);
 $User = User($Order['Users_id']);
 $Products = Basket($Order['id'], $Order['Users_id']);
 ?>

@@ -1,7 +1,7 @@
 <?php
 $User = User(UrlRead(3));
 
-$Orders = Sorgu("*", "Orders", "Users_id='$User[id]'");
+$Orders = Query("*", "Orders", "Users_id='$User[id]'");
 ?>
 
 <div class="vb__layout__content">

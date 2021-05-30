@@ -1,5 +1,5 @@
 <?php
-$Users = Sorgu("*", "Users");
+$Users = Query("*", "Users");
 ?>
 
 <div class="vb__layout__content">

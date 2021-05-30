@@ -18,7 +18,7 @@ if ($_POST) {
     ), "id='$Constant_id'");
     if ($Query) header("location:/panel/constant/edit/$Constant_id#o"); else  header("location:/panel/constant/edit/$Constant_id#n");
 } else {
-    $Constant = Sorgu("*", "Constant", "id='$Constant_id'", 1);
+    $Constant = Query("*", "Constant", "id='$Constant_id'", 1);
 }
 ?>
 <div class="vb__layout__content">

@@ -1,5 +1,5 @@
 <?php
-$Logs = Sorgu("*", "Log");
+$Logs = Query("*", "Log");
 ?>
 <div class="vb__layout__content">
     <div class="vb__breadcrumbs">
@@ -69,7 +69,7 @@ $Logs = Sorgu("*", "Log");
                                                 <?php if ($log['Users_id']) { ?>
                                                     <span title="<?php echo User($log['Users_id'])['name'] . ' ' . User($log['Users_id'])['surname'] ?>"><?php echo User($log['Users_id'])['email'] ?></span>
                                                 <?php } else if ($log['Admin_id']) { ?>
-                                                    <span title="<?php echo Sorgu("name", "Admin", "id='$log[Admin_id]'", 1)['name'] ?>">Admin: <?php echo Sorgu("email", "Admin", "id='$log[Admin_id]'", 1)['email'] ?></span>
+                                                    <span title="<?php echo Query("name", "Admin", "id='$log[Admin_id]'", 1)['name'] ?>">Admin: <?php echo Query("email", "Admin", "id='$log[Admin_id]'", 1)['email'] ?></span>
                                                 <?php } ?>
                                             </td>
                                         </tr>

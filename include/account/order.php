@@ -6,7 +6,7 @@ $Order_id = UrlRead(3);
 if (!is_numeric($Order_id))
     header("location:/404");
 
-$Order = Sorgu("*", "Orders", "id='$Order_id' AND Users_id='$User[id]'", 1);
+$Order = Query("*", "Orders", "id='$Order_id' AND Users_id='$User[id]'", 1);
 if (!$Order)
     header("location:/404");
 

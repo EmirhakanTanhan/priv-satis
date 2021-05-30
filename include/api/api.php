@@ -15,7 +15,7 @@ if (UrlRead(2) == 'login') {
         $Return['STATUS'] = "empty";
     }
     if (!$Return['STATUS']) {
-        $_User = Sorgu("*", "Users", "email='$email'", 1);
+        $_User = Query("*", "Users", "email='$email'", 1);
         if ($_User) {
             if (password_verify($pass, $_User['password'])) {
                 $_SESSION['User_id'] = $_User['id'];
@@ -48,7 +48,7 @@ if (UrlRead(2) == 'signup') {
             $Return['STATUS'] = "invalid_pass";
         }
 
-        $UserCheck = Sorgu("email", "Users", "email='$email'", 1)['email'];
+        $UserCheck = Query("email", "Users", "email='$email'", 1)['email'];
         if ($UserCheck) {
             $Return['STATUS'] = "email_exists";
         } else if (!$Return['STATUS'] and $name and $surname and $email and $pass and $pass_repeat) {
@@ -75,8 +75,8 @@ if ($User_id) {
 
     if (UrlRead(2) == "basketadd") {
         $Product_id = $Post['id'];
-        $Product = Sorgu("*", "Product", "id='$Product_id'", 1);
-        $Basket = Sorgu("*", "Basket", "Product_id='$Product_id' AND Users_id='$User_id' AND Orders_id IS NULL", 1);
+        $Product = Query("*", "Product", "id='$Product_id'", 1);
+        $Basket = Query("*", "Basket", "Product_id='$Product_id' AND Users_id='$User_id' AND Orders_id IS NULL", 1);
         if (!$Basket) {
             $Query = Process("insert", "Basket", array(
                 "Product_id" => $Product_id,
@@ -88,7 +88,7 @@ if ($User_id) {
             $Query = true;
         }
 
-        $Count = Sorgu("COUNT(id) AS id", "Basket", "Users_id='$User_id' AND Orders_id IS NULL", 1)['id'];
+        $Count = Query("COUNT(id) AS id", "Basket", "Users_id='$User_id' AND Orders_id IS NULL", 1)['id'];
         if ($Query) {
             $Return['BasketCount'] = $Count;
             $Return['STATUS'] = 'add_success';
@@ -100,7 +100,7 @@ if ($User_id) {
     if (UrlRead(2) == "basketremove") {
         $Product_id = $Post['id'];
         $Query = Process("delete", "Basket", null, "Users_id='$User_id' AND Product_id='$Product_id' AND Orders_id IS NULL");
-        $Check = Sorgu("*", "Basket", "Users_id='$User_id' AND Orders_id IS NULL");
+        $Check = Query("*", "Basket", "Users_id='$User_id' AND Orders_id IS NULL");
 
         if ($Query and !$Check) {
             $Return['STATUS'] = "remove_success_basket_empty";
@@ -132,7 +132,7 @@ if ($User_id) {
         } else if (!preg_match("/^[0-9]*$/", $hash)) {
             $Return['STATUS'] = "invalid_hash";
         }
-        $UserCheck = Sorgu("email", "Users", "email='$email'", 1)['email'];
+        $UserCheck = Query("email", "Users", "email='$email'", 1)['email'];
         if ($UserCheck and $User['email'] != $email) {
             $Return['STATUS'] = "email_exist";
         } else if (!$Return['STATUS']) {

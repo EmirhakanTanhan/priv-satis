@@ -11,8 +11,8 @@ if ($_POST) {
     if ($Query) header("location:/panel/menus#o"); else  header("location:/panel/menus#n");
 }
 
-$TopMenu = json_decode(Sorgu("topmenu", "Settings", "id=1", 1)['topmenu'], true);
-$BottomMenu = json_decode(Sorgu("footermenu", "Settings", "id=1", 1)['footermenu'], true);
+$TopMenu = json_decode(Query("topmenu", "Settings", "id=1", 1)['topmenu'], true);
+$BottomMenu = json_decode(Query("footermenu", "Settings", "id=1", 1)['footermenu'], true);
 
 $SubMenu = subMenu();
 ?>
@@ -50,7 +50,7 @@ $SubMenu = subMenu();
                                         <?php } ?>
                                         <?php
                                         foreach ($TopMenu as $topmenu) {
-                                            $Parent_page = Sorgu("*", "Pages", "id='$topmenu[id]'", 1);
+                                            $Parent_page = Query("*", "Pages", "id='$topmenu[id]'", 1);
                                             ?>
                                             <li class="dd-item dd3-item" data-id="<?php echo $Parent_page['id'] ?>">
                                                 <div class="dd-handle dd3-handle"></div>
@@ -61,7 +61,7 @@ $SubMenu = subMenu();
                                                     <ol class="dd-list">
                                                         <?php
                                                         foreach ($topmenu['children'] as $child_page) {
-                                                            $Child_page = Sorgu("*", "Pages", "id='$child_page[id]'", 1);
+                                                            $Child_page = Query("*", "Pages", "id='$child_page[id]'", 1);
                                                             ?>
                                                             <li class="dd-item dd3-item"
                                                                 data-id="<?php echo $Child_page['id'] ?>">
@@ -91,7 +91,7 @@ $SubMenu = subMenu();
                                         <?php } ?>
                                         <?php
                                         foreach ($BottomMenu as $bottommenu) {
-                                            $Parent_page = Sorgu("*", "Pages", "id='$bottommenu[id]'", 1);
+                                            $Parent_page = Query("*", "Pages", "id='$bottommenu[id]'", 1);
                                             ?>
                                             <li class="dd-item dd3-item" data-id="<?php echo $Parent_page['id'] ?>">
                                                 <div class="dd-handle dd3-handle"></div>
@@ -102,7 +102,7 @@ $SubMenu = subMenu();
                                                     <ol class="dd-list">
                                                         <?php
                                                         foreach ($bottommenu['children'] as $child_page) {
-                                                            $Child_page = Sorgu("*", "Pages", "id='$child_page[id]'", 1);
+                                                            $Child_page = Query("*", "Pages", "id='$child_page[id]'", 1);
                                                             ?>
                                                             <li class="dd-item dd3-item"
                                                                 data-id="<?php echo $Child_page['id'] ?>">
@@ -127,7 +127,7 @@ $SubMenu = subMenu();
                                 <div class="dd" id="nestable3">
                                     <ol class="dd-list">
                                         <?php
-                                        $Parent_page = Sorgu("*", "Pages", "Pages_id IS NULL");
+                                        $Parent_page = Query("*", "Pages", "Pages_id IS NULL");
                                         foreach ($Parent_page as $parent_page) {
                                             ?>
                                             <li class="dd-item dd3-item" data-id="<?php echo $parent_page['id'] ?>">
@@ -138,7 +138,7 @@ $SubMenu = subMenu();
                                                 <?php if (array_key_exists($parent_page['id'], $SubMenu)) { ?>
                                                     <ol class="dd-list">
                                                         <?php
-                                                        $Child_page = Sorgu("*", "Pages", "Pages_id='$parent_page[id]'");
+                                                        $Child_page = Query("*", "Pages", "Pages_id='$parent_page[id]'");
                                                         foreach ($Child_page as $child_page) {
                                                             ?>
                                                             <li class="dd-item dd3-item"

@@ -13,7 +13,7 @@ if ($_POST) {
     //Ürünün stok sayısını değiştirme
     if ($status == "1") {
         if ($Query) {
-            $Product_stock_num = Sorgu("stock", "Product", "id='$product_'", 1)['stock'];
+            $Product_stock_num = Query("stock", "Product", "id='$product_'", 1)['stock'];
             $Product_stock_num = $Product_stock_num + 1;
 
             $Query = Process("update", "Product", array(

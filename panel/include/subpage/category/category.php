@@ -31,7 +31,7 @@ $Category_id = UrlRead(3);
                     <div class="col-lg-12">
                         <div class="mb-5">
                             <?php
-                            $Products = Sorgu("*", "Product", "Category_id='$Category_id'");
+                            $Products = Query("*", "Product", "Category_id='$Category_id'");
                             if (!$Products) { ?>
                                 <div style="margin:auto; width: 317px">
                                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"

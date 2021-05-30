@@ -1,6 +1,6 @@
 <?php
 $Stock_id = UrlRead(4);
-$Stock = Sorgu("*", "Stock", "id='$Stock_id'", 1);
+$Stock = Query("*", "Stock", "id='$Stock_id'", 1);
 
 if ($_POST) {
     $status = $_POST['status'];
@@ -17,7 +17,7 @@ if ($_POST) {
     if ($Query) {
         //durum (açık->kapalı) veya (açık->satıldı)
         if ($Stock['status'] == "1" and ($status == "0" or $status == "2")) {
-            $Product_stock_num = Sorgu("stock", "Product", "id='$product_'", 1)['stock'];
+            $Product_stock_num = Query("stock", "Product", "id='$product_'", 1)['stock'];
             $Product_stock_num = $Product_stock_num - 1;
             if ($Product_stock_num <= 0) $Product_stock_num = 0;
 
@@ -27,7 +27,7 @@ if ($_POST) {
         }
         //durum (kapalı->açık) veya (satıldı->açık)
         if (($Stock['status'] == "0" or $Stock['status'] == "2") and $status == "1") {
-            $Product_stock_num = Sorgu("stock", "Product", "id='$product_'", 1)['stock'];
+            $Product_stock_num = Query("stock", "Product", "id='$product_'", 1)['stock'];
             $Product_stock_num = $Product_stock_num + 1;
 
             $Query = Process("update", "Product", array(

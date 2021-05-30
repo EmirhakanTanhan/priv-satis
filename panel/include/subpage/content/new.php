@@ -66,13 +66,13 @@ if ($_POST) {
                                         <select name="parent_page" class="selectpicker w-100" data-live-search="true">
                                             <option value="" selected>Üst Sayfa Yok</option>
                                             <?php
-                                            $Pages = Sorgu("id, name, Pages_id", "Pages");
+                                            $Pages = Query("id, name, Pages_id", "Pages");
                                             foreach ($Pages as $page) {
                                                 if ($page['id'] != 1 and $page['Pages_id'] != 1) {
                                                     ?>
                                                     <option value="<?php echo $page['id'] ?>">
                                                         <?php if ($page['Pages_id']) {
-                                                            echo Sorgu("name", "Pages", "id='$page[Pages_id]'", 1)['name'] . " > ";
+                                                            echo Query("name", "Pages", "id='$page[Pages_id]'", 1)['name'] . " > ";
                                                         }
                                                         echo $page['name'] ?></option>
                                                 <?php }

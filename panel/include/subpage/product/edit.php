@@ -50,7 +50,7 @@ if ($_POST) {
     ), "id='$Product_id'");
     if ($Query) header("location:/panel/products/edit/$Product_id#o"); else header("location:/panel/products/edit/$Product_id#n");
 } else {
-    $Product = Sorgu("*", "Product", "id='$Product_id'", 1);
+    $Product = Query("*", "Product", "id='$Product_id'", 1);
 }
 ?>
 <script src="/panel/include/subpage/product/product.js"></script>

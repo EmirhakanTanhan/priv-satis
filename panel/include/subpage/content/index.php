@@ -3,7 +3,7 @@ $Page_id = UrlRead(3);
 if (!$Page_id)
     $Page_id = 0;
 
-$Pages = Sorgu("*", "Pages");
+$Pages = Query("*", "Pages");
 $SubMenu = subMenu();
 ?>
 <div class="vb__layout__content">
@@ -17,7 +17,7 @@ $SubMenu = subMenu();
                 <span class="vb__breadcrumbs__arrow"></span>
                 <a href="/panel/contents">İçerik Yönetimi</a>
                 <span class="vb__breadcrumbs__arrow"></span>
-                <span><?php echo Sorgu("name", "Pages", "id='$Page_id'", 1)['name'] ?></span>
+                <span><?php echo Query("name", "Pages", "id='$Page_id'", 1)['name'] ?></span>
             <?php } ?>
         </div>
     </div>

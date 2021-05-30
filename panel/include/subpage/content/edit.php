@@ -25,7 +25,7 @@ if ($_POST) {
         "Pages_id" => $parent_page
     ), "id='$Page_id'");
 
-    $PicsToDelete = Sorgu("id", "Images", "Pages_id='$Page_id'");
+    $PicsToDelete = Query("id", "Images", "Pages_id='$Page_id'");
 
     if ($PicsToDelete) {
         foreach ($PicsToDelete as $pictodelete) {
@@ -45,8 +45,8 @@ if ($_POST) {
 
     if ($Query or $Query_pic or $PicsToDelete) header("location:/panel/contents/edit/$Page_id#o"); else  header("location:/panel/contents/edit/$Page_id#n");
 } else {
-    $Curr_Page = Sorgu("*", "Pages", "id='$Page_id'", 1);
-    $images = Sorgu("*", "Images", "Pages_id='$Curr_Page[id]'");
+    $Curr_Page = Query("*", "Pages", "id='$Page_id'", 1);
+    $images = Query("*", "Images", "Pages_id='$Curr_Page[id]'");
 }
 ?>
 
@@ -78,13 +78,13 @@ if ($_POST) {
                                         <select name="parent_page" class="selectpicker w-100" data-live-search="true">
                                             <option value="" selected>Üst Sayfa Yok</option>
                                             <?php
-                                            $Pages = Sorgu("id, name, Pages_id", "Pages");
+                                            $Pages = Query("id, name, Pages_id", "Pages");
                                             foreach ($Pages as $page) {
                                                 if ($page['id'] != 1 and $page['Pages_id'] != 1) {
                                                     ?>
                                                     <option value="<?php echo $page['id'] ?>" <?php if ($page['id'] == $Curr_Page['Pages_id']) echo "selected"; ?> >
                                                         <?php if ($page['Pages_id']) {
-                                                            echo Sorgu("name", "Pages", "id='$page[Pages_id]'", 1)['name'] . " > ";
+                                                            echo Query("name", "Pages", "id='$page[Pages_id]'", 1)['name'] . " > ";
                                                         }
                                                         echo $page['name'] ?></option>
                                                 <?php }

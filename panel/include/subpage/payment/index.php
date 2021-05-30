@@ -1,5 +1,5 @@
 <?php
-$Payments = Sorgu("*", "Payment");
+$Payments = Query("*", "Payment");
 ?>
 <div class="vb__layout__content">
     <div class="vb__breadcrumbs">

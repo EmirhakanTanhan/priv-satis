@@ -1,5 +1,5 @@
 <?php
-$Admin = Sorgu("*", "Admin", "id='$_SESSION[Admin_id]'", 1);
+$Admin = Query("*", "Admin", "id='$_SESSION[Admin_id]'", 1);
 ?>
 
 <div class="vb__layout__content">

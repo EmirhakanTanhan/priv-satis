@@ -4,7 +4,7 @@ if ($_POST) {
     $Email = $_POST['email'];
     if (!$Email) $Error['empty'] = 'Email giriniz';
     if (!$Error) {
-        $Admin = Sorgu("*", "Admin", "email='$Email'", 1);
+        $Admin = Query("*", "Admin", "email='$Email'", 1);
         if ($Admin) {
             $Success['email'] = "'$Email' adresine link gönderdik.";
         } else {

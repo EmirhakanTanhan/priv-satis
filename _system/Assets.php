@@ -16,8 +16,8 @@ class Assets
 
     public function __construct()
     {
-        $this->Mail = json_decode(Sorgu("contact", "Settings", "id=1", 1)['contact'], true);
-        $this->Seo = json_decode(Sorgu("seo", "Settings", "id=1", 1)['seo'], true);
+        $this->Mail = json_decode(Query("contact", "Settings", "id=1", 1)['contact'], true);
+        $this->Seo = json_decode(Query("seo", "Settings", "id=1", 1)['seo'], true);
     }
 
     /**

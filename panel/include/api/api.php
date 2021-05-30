@@ -2,7 +2,7 @@
 $Post = Post(); //Formdan göndermiyosan (mesela button), bunu kullan
 if ($_SESSION['Admin_id']) {
     $Admin_id = $_SESSION['Admin_id'];
-    $Admin = Sorgu("*", "Admin", "id='$Admin_id'", 1);
+    $Admin = Query("*", "Admin", "id='$Admin_id'", 1);
 }
 $Return['STATUS'] = null;
 
@@ -71,10 +71,48 @@ if ($Admin_id) {
                     }
                     break;
             }
+
+        case 'verlogin':
+            $email = $_POST['email'];
+            $pass = $_POST['password'];
+
+            switch (true) {
+                case (empty($email) or empty($pass)):
+                    $Return['STATUS'] = "ERR_EMPTY";
+                    break;
+                case (!filter_var($email, FILTER_VALIDATE_EMAIL)):
+                    $Return['STATUS'] = "ERR_INVALID_EMAIL";
+                    break;
+                case ((!$_Admin = Query("*", "Admin", "email='$email'", 1)) or !password_verify($pass, $_Admin['password'])):
+                    $Return['STATUS'] = "ERR_INVALID_USER_OR_PASS";
+                    break;
+                default:
+                    $_SESSION['Admin_id'] = $_Admin['id'];
+                    $_SESSION['email'] = $_Admin['email'];
+                    $_SESSION['name'] = $_Admin['name'];
+                    $Return['STATUS'] = "SUCC_LOGIN";
+            }
+            break;
+
+        case 'vercheck':
+            $VerUrl = $_POST['ver_url']; //Page url >>>> http://satis.me/panel/verification/ADOI8U7oCXOJoJJxBDMF30
+            $VerLink = explode("/", $VerUrl); //Explode the link out of the page url
+            $VerLink = end($VerLink); //verification link >>>> ADOI8U7oCXOJoJJxBDMF30
+            $VerType = substr($VerLink, 0, 1); //verification link >>>> A
+            $VerId = hexdec(substr($VerLink, 20)); //verification id transformed to decimal from hexadecimal >>>> 30 (hex) >>>> 48 (dec)
+
+            switch (true) {
+                case (empty($VerLink) or strlen($VerLink) < 20):
+                    $Return['STATUS'] = "ERR_INVALID_LINK";
+                    break;
+                case (!$VerDB = Query("*", "Verification", "id='$VerId'", 1) or $VerLink != $VerDB['link']):
+                    $Return['STATUS'] = "ERR_INVALID_LINK";
+                    break;
+            }
     }
 
 } else {
-    $Return['STATUS'] = 'login_required';
+    $Return['STATUS'] = 'ERR_LOGIN_REQUIRED';
 }
 
 echo json_encode($Return, JSON_UNESCAPED_UNICODE);

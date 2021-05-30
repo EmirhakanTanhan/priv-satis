@@ -6,7 +6,7 @@ if ($_POST) {
     if (!$Email) $Error['email'] = 'Email Giriniz';
     if (!$Password) $Error['password'] = 'Şifre Giriniz';
     if (!$Error) {
-        $Admin = Sorgu("*", "Admin", "email='$Email'", 1);
+        $Admin = Query("*", "Admin", "email='$Email'", 1);
         if ($Admin) {
             if (password_verify($Password, $Admin['password'])) {
                 $_SESSION['Admin_id'] = $Admin['id'];

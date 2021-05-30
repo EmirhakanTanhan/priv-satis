@@ -42,7 +42,7 @@ if ($Data) {
 
     if ($Query) header("location:/panel/general#o"); else  header("location:/panel/general#n");
 } else {
-    $Data = Sorgu("*", "Settings", "id=1", 1);
+    $Data = Query("*", "Settings", "id=1", 1);
 
     $Data['logo'] = json_decode($Data['logo'], true);
     $Data['seo'] = json_decode($Data['seo'], true);

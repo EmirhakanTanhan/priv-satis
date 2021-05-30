@@ -35,9 +35,43 @@ $("#AdminEdit").submit(function () {
     });
 })
 
-//Alert
+//$("#VerCheck").submit(function () >>>>post on page load
+$(function () {
+    axios.post('/panel/api/vercheck', $("#VerCheck").serialize()).then(function (response) {
+        console.log(response.data);
+
+    }).catch(function (error) {
+        console.log(error);
+    });
+})
+
+$("#VerLogin").submit(function () {
+    axios.post('/panel/api/verlogin', $("#VerLogin").serialize()).then(function (response) {
+        console.log(response.data);
+        switch (response.data.STATUS) {
+            case 'ERR_EMPTY':
+                new Notification("Lütfen bütün boşlukları doldurun", 1);
+                break;
+            case 'ERR_INVALID_EMAIL':
+                new Notification("Geçersiz bir email adresi girdiniz");
+                break;
+            case 'ERR_INVALID_USER_OR_PASS':
+                new Notification("Email adresi veya şifre hatalı");
+                break;
+            case 'SUCC_LOGIN':
+                new Notification("Başarıyla giriş yaptınız", 0);
+                setTimeout(function () {
+                    window.location.href = "/panel"
+                }, 800);
+                break;
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+})
+
+//Alert | status : 0 = success, 1 = warning, 2 = failed
 function Notification(text, status = 2, closeButton = 0) {
-    //status : 0 = success, 1 = warning, 2 = failed
     switch (status) {
         case 0:
             _status = 'success';
