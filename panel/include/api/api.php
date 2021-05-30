@@ -74,7 +74,6 @@ switch (UrlRead(3)) {
                 }
                 break;
         }
-
         break;
 }
 
@@ -141,24 +140,6 @@ if ($Admin_id) {
                         $Return['STATUS'] = "SUCC_VER_REQ_SENT";
                         $Return['EMAIL'] = $ver_email;
                     }
-                    break;
-            }
-            break;
-
-
-        case 'vercheck':
-            $VerUrl = $_POST['ver_url']; //Page url >>>> http://satis.me/panel/verification/ADOI8U7oCXOJoJJxBDMF30
-            $VerLink = explode("/", $VerUrl); //Explode the link out of the page url
-            $VerLink = end($VerLink); //verification link >>>> ADOI8U7oCXOJoJJxBDMF30
-            $VerType = substr($VerLink, 0, 1); //verification link >>>> A
-            $VerId = hexdec(substr($VerLink, 20)); //verification id transformed to decimal from hexadecimal >>>> 30 (hex) >>>> 48 (dec)
-
-            switch (true) {
-                case (empty($VerLink) or strlen($VerLink) < 20):
-                    $Return['STATUS'] = "ERR_INVALID_LINK_a";
-                    break;
-                case (!$VerDB = Query("*", "Verification", "id='$VerId'", 1) or $VerUrl != $VerDB['link']):
-                    $Return['STATUS'] = "ERR_INVALID_LINK_b";
                     break;
             }
             break;
