@@ -256,7 +256,7 @@ if ($Data) {
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="smtp_pass">SMTP Password</label>
-                                    <input type="text" class="form-control" name="smtp_pass" placeholder=""
+                                    <input type="password" class="form-control" name="smtp_pass" placeholder=""
                                            id="smtp_pass" value="<?php echo $Data['contact']['smtp_pass']; ?>"/>
                                 </div>
                                 <div class="form-group col-md-6">

@@ -75,6 +75,17 @@ switch (UrlRead(3)) {
                 break;
         }
         break;
+
+    case 'forgotpassword':
+        $email = $_POST['email'];
+
+        switch (true) {
+            case (empty($email)):
+                $Return['STATUS'] = "ERR_EMPTY";
+                break;
+                /*case ($_User = Query("*", "Admin", "email='$email'"))*/
+        }
+        break;
 }
 
 if ($Admin_id) {

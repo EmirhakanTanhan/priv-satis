@@ -88,6 +88,16 @@ $("#VerLogin").submit(function () {
     });
 })
 
+$("#ForgotPass").submit(function () {
+    axios.post('/panel/api/forgotpassword', $("#ForgotPass").serialize()).then(function (response) {
+        console.log(response.data);
+
+
+    }).catch(function (error) {
+        console.log(error);
+    })
+})
+
 //Alert | status : 0 = success, 1 = warning, 2 = failed
 function Notification(text, status = 2, closeButton = 0) {
     switch (status) {
