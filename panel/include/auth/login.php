@@ -50,7 +50,7 @@ if ($_POST) {
                                value="<?php echo $Email; ?>"/>
                     </div>
                     <div class="form-group mb-4">
-                        <input type="password" name="password" class="form-control" placeholder="Şifre"/>
+                        <input type="password" name="password" id="pass" class="form-control" placeholder="Şifre"/>
                     </div>
                     <button class="btn btn-primary text-center w-100" type="submit">
                         <strong>Giriş Yap</strong>
@@ -71,3 +71,16 @@ if ($_POST) {
         </div>
     </div>
 </div>
+
+<script>
+    ;(function ($) {
+        'use strict'
+        $(function () {
+            $('#pass').password({
+                eyeClass: '',
+                eyeOpenClass: 'fe fe-eye',
+                eyeCloseClass: 'fe fe-eye-off',
+            })
+        })
+    })(jQuery)
+</script>

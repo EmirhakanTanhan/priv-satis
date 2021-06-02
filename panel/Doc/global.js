@@ -73,14 +73,69 @@ $("#VerLogin").submit(function () {
             case 'ERR_INVALID_USER_OR_PASS':
                 new Notification("Email adresi veya şifre hatalı");
                 break;
-            case 'ERR_LOGIN_REQUIRED':
-                new Notification("Giriş yapmanız gerekli");
-                break;
             case 'SUCC_LOGIN':
                 new Notification("Başarıyla giriş yaptınız", 0);
                 setTimeout(function () {
                     window.location.href = "/panel"
                 }, 800);
+                break;
+            default:
+                new Notification("Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
+                break;
+
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+})
+
+$("#VerChangePass").submit(function () {
+    axios.post('/panel/api/verchangepass', $("#VerChangePass").serialize()).then(function (response) {
+        console.log(response.data);
+        switch (response.data.STATUS) {
+            case 'ERR_INVALID_LINK_a':
+                window.location.href = "/panel/verification/" + response.data.LINK + "?status=" + response.data.STATUS
+                break;
+            case 'ERR_INVALID_LINK_b':
+                window.location.href = "/panel/verification/" + response.data.LINK + "?status=" + response.data.STATUS
+                break;
+            case 'ERR_EMPTY':
+                new Notification("Lütfen bütün boşlukları doldurun", 1);
+                break;
+            case 'ERR_INVALID_PASS_RPT':
+                new Notification("Şifreleriniz birbiriyle uyuşmuyor");
+                break;
+            case 'SUCC_PASS_CHANGED':
+                new Notification("Başarıyla şifrenizi değiştirdiniz", 0);
+                setTimeout(function () {
+                    window.location.href = "/panel/login"
+                }, 800);
+                break;
+            default:
+                new Notification("Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
+                break;
+
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+})
+
+$("#ChangePass").submit(function () {
+    axios.post('/panel/api/changepass', $("#ChangePass").serialize()).then(function (response) {
+        console.log(response.data);
+        switch (response.data.STATUS) {
+            case 'ERR_EMPTY':
+                new Notification("Lütfen bütün boşlukları doldurun", 1);
+                break;
+            case 'ERR_INVALID_PASS_RPT':
+                new Notification("Şifreleriniz birbiriyle uyuşmuyor");
+                break;
+            case 'SUCC_PASS_CHANGED':
+                new Notification("Başarıyla şifrenizi değiştirdiniz", 0);
+                break;
+            default:
+                new Notification("Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
                 break;
         }
     }).catch(function (error) {
@@ -90,8 +145,24 @@ $("#VerLogin").submit(function () {
 
 $("#ForgotPass").submit(function () {
     axios.post('/panel/api/forgotpassword', $("#ForgotPass").serialize()).then(function (response) {
-        console.log(response.data);
-
+        console.log(response);
+        switch (response.data.STATUS) {
+            case 'ERR_EMPTY':
+                new Notification("Lütfen bütün boşlukları doldurun", 1);
+                break;
+            case 'ERR_INVALID_EMAIL':
+                new Notification("Geçersiz bir email adresi girdiniz");
+                break;
+            case 'ERR_INVALID_USER':
+                new Notification("Böyle bir kullanıcı bulunmamaktadır", 1);
+                break;
+            case 'SUCC_VER_REQ_SENT':
+                new Notification("Şifrenizi sıfırlamak için " + response.data.EMAIL + " adresine gelen onaylama linkine gidiniz", 0);
+                break;
+            default:
+                new Notification("Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
+                break;
+        }
 
     }).catch(function (error) {
         console.log(error);
