@@ -33,7 +33,7 @@ if ($_GET['status'] == 'SUCC_APPLY_CHANGE') {
                     <div class="text-gray-6 font-size-24">
                         <?php if ($VerType == 'A') { ?><span>Email adresiniz onaylandı.</span><?php } ?>
                         <?php if ($VerType == 'B') { ?>
-                            <span>Şifreniz sıfırlandı, lütfen yeni bir şifre belirleyiniz.</span><?php } ?>
+                            <span>Artık yeni bir şifre belirleyebilirsiniz.</span><?php } ?>
                         <?php if (!$VerCheck) { ?>
                             <span>Anlaşılan hatalı veya daha önce kullanılmış bir link girdiniz.</span><?php } ?>
                     </div>
@@ -55,7 +55,7 @@ if ($_GET['status'] == 'SUCC_APPLY_CHANGE') {
                                 <input name="email" type="text" class="form-control" placeholder="Email"/>
                             </div>
                             <div class="form-group mb-4">
-                                <input name="password" type="password" class="form-control" placeholder="Şifre"/>
+                                <input name="password" type="password" id="pass" class="form-control" placeholder="Şifre"/>
                             </div>
                             <button class="btn btn-primary text-center w-100" type="submit">
                                 <strong>Giriş Yap</strong>
@@ -66,6 +66,29 @@ if ($_GET['status'] == 'SUCC_APPLY_CHANGE') {
                         </a>
                     </div>
                 <?php } ?>
+
+                <?php if ($VerType == 'B') { ?> <!--Reset password success-->
+                    <div class="card vb__auth__boxContainer" style="padding-top: 30px">
+                        <div class="text-dark font-size-24 mb-4">
+                            <strong>Şifre Değiştir</strong>
+                        </div>
+                        <form action="javascript:;" method="post" id="VerChangePass" class="mb-4">
+                            <input type="hidden" name="ver_url" value="<?php echo UrlRead("all"); ?>">
+
+                            <div class="form-group mb-4">
+                                <input name="password_new" type="password" id="pass_new" class="form-control" placeholder="Şifre"/>
+                            </div>
+                            <div class="form-group mb-4">
+                                <input name="password_new_repeat" type="password" id="pass_new_rpt" class="form-control"
+                                       placeholder="Şifre Tekrar"/>
+                            </div>
+                            <button class="btn btn-primary text-center w-100" type="submit">
+                                <strong>Şifremi Değiştir</strong>
+                            </button>
+                        </form>
+                    </div>
+                <?php } ?>
+
             </div>
         <?php } ?>
         <div class="mt-auto pb-5 pt-5">
@@ -77,3 +100,26 @@ if ($_GET['status'] == 'SUCC_APPLY_CHANGE') {
         </div>
     </div>
 </div>
+
+<script>
+    ;(function ($) {
+        'use strict'
+        $(function () {
+            $('#pass').password({
+                eyeClass: '',
+                eyeOpenClass: 'fe fe-eye',
+                eyeCloseClass: 'fe fe-eye-off',
+            })
+            $('#pass_new').password({
+                eyeClass: '',
+                eyeOpenClass: 'fe fe-eye',
+                eyeCloseClass: 'fe fe-eye-off',
+            })
+            $('#pass_new_rpt').password({
+                eyeClass: '',
+                eyeOpenClass: 'fe fe-eye',
+                eyeCloseClass: 'fe fe-eye-off',
+            })
+        })
+    })(jQuery)
+</script>

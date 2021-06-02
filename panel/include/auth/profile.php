@@ -49,7 +49,7 @@ $Admin = Query("*", "Admin", "id='$_SESSION[Admin_id]'", 1);
                 </div>
 
                 <div class="card" style="padding-bottom: 15px">
-                    <form action="" method="post">
+                    <form action="javascript:;"  method="post" id="ChangePass">
                         <div class="card-header">
                             <div class="row" style="justify-content: space-between">
                                 <h4 class="ml-3 mb-0" style="align-self: center">

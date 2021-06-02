@@ -88,7 +88,6 @@ if ($_SESSION['Admin_id']) {
             include "include/log.php";
             break;
 
-
         case 'logout':
             include "include/auth/logout.php";
             break;
