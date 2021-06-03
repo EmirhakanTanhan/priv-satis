@@ -9,6 +9,7 @@ $Pagination_ticket = Paginator(5, "Ticket", UrlRead(3), "", "0");
 if ($Pagination_ticket)
     $Tickets = Query("*", "Ticket", "", "$Pagination_ticket[Start],$Pagination_ticket[Limit]", "id DESC");
 
+
 if ($_POST) {
     $description = $_POST['description'];
     $ticket_id = $_POST['ticketId'];
@@ -136,60 +137,62 @@ if ($_POST) {
                 </div>
             </div>
             <?php if ($Ticket_id) { ?>
-                <div class="card flex-grow-1">
-                    <div class="card-header card-header-flex flex-wrap">
-                        <div class="d-flex flex-column justify-content-center mr-auto">
-                            <h5 class="mb-0 mr-2 font-size-18">
-                                <?php echo User($Ticket['Users_id'])['name'] . " " . User($Ticket['Users_id'])['surname'] ?>
-                                <span class="font-size-14 text-gray-6"><a style="text-decoration: underline"
-                                                                          href="/panel/users/<?php echo $Ticket['Users_id'] ?>"><?php echo User($Ticket['Users_id'])['email'] ?></a></span>
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex flex-column justify-content-end" style="height: 350px">
-                            <div class="vb__g14__contentWrapper vb__customScroll">
-                                <?php foreach ($Messages as $message) {
-                                    if ($message['Admin_id']) {
-                                        $Admin_name = Query("name", "Admin", "id='$message[Admin_id]'", 1)['name'];
-                                        ?>
-                                        <div class="vb__g14__message">
-                                            <div class="vb__g14__messageContent">
-                                                <div class="text-gray-4 font-size-12 text-uppercase"><?php echo $Admin_name . " | " . date_format(date_create($message['history']), "Y/m/d, H:i"); ?>
-                                                </div>
-                                                <div><?php echo $message['description']; ?></div>
-                                            </div>
-                                        </div>
-                                    <?php }
-                                    if ($message['Users_id']) { ?>
-                                        <div class="vb__g14__message vb__g14__message--answer">
-                                            <div class="vb__g14__messageContent">
-                                                <div class="text-gray-4 font-size-12 text-uppercase"><?php echo date_format(date_create($message['history']), "Y/m/d, H:i") ?>
-                                                </div>
-                                                <div><?php echo $message['description'] ?></div>
-                                            </div>
-                                        </div>
-                                    <?php }
-                                } ?>
-                            </div>
-                        </div>
-                        <div class="pt-2 pb-2"></div>
-                        <div>
-                            <form action="" method="post" autocomplete="off">
-                                <div class="input-group mb-3">
-                                    <input type="hidden" name="ticketId" value="<?php echo $Ticket_id; ?>"/>
-                                    <input type="text" class="form-control" name="description" placeholder="Cevap Yaz"/>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit">
-                                            <i class="fe fe-send align-middle"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+            <div class="card flex-grow-1">
+                <div class="card-header card-header-flex flex-wrap">
+                    <div class="d-flex flex-column justify-content-center mr-auto">
+                        <h5 class="mb-0 mr-2 font-size-18">
+                            <?php echo User($Ticket['Users_id'])['name'] . " " . User($Ticket['Users_id'])['surname'] ?>
+                            <span class="font-size-14 text-gray-6"><a style="text-decoration: underline"
+                                                                      href="/panel/users/<?php echo $Ticket['Users_id'] ?>"><?php echo User($Ticket['Users_id'])['email'] ?></a></span>
+                        </h5>
                     </div>
                 </div>
-            <?php } } ?>
+            </div>
+            <div class="card-body">
+                <div class="d-flex flex-column justify-content-end" style="height: 350px">
+                    <div class="vb__g14__contentWrapper vb__customScroll">
+                        <?php
+                        foreach ($Messages as $message) {
+                            if ($message['Admin_id']) {
+                                $Admin_name = Query("name", "Admin", "id='$message[Admin_id]'", 1)['name'];
+                                ?>
+                                <div class="vb__g14__message">
+                                    <div class="vb__g14__messageContent">
+                                        <div class="text-gray-4 font-size-12 text-uppercase"><?php echo $Admin_name . " | " . date_format(date_create($message['history']), "Y/m/d, H:i"); ?> </div>
+                                    </div>
+                                </div>
+                            <?php }
+                            if ($message['Users_id']) { ?>
+                                <div class="vb__g14__message vb__g14__message--answer">
+                                    <div class="vb__g14__messageContent">
+                                        <div class="text-gray-4 font-size-12 text-uppercase"><?php echo date_format(date_create($message['history']), "Y/m/d, H:i") ?>
+                                        </div>
+                                        <div><?php echo $message['description'] ?></div>
+                                    </div>
+                                </div>
+                            <?php }
+                        } ?>
+                    </div>
+                </div>
+                <div class="pt-2 pb-2"></div>
+                <div>
+                    <form action="" method="post" autocomplete="off">
+                        <div class="input-group mb-3">
+                            <input type="hidden" name="ticketId" value="<?php echo $Ticket_id; ?>"/>
+                            <input type="text" class="form-control" name="description"
+                                   placeholder="Cevap Yaz"/>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fe fe-send align-middle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
+        <?php }
+        } ?>
     </div>
+</div>
 </div>

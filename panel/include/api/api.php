@@ -123,7 +123,6 @@ switch (UrlRead(3)) {
                 }
                 break;
         }
-
         break;
 
     case 'forgotpassword':
